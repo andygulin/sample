@@ -1,0 +1,2 @@
+examples.showcase.impl.HibernateUserDaoImpl
+examples.showcase.impl.JdbcTemplateUserDaoImpl
