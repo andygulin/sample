@@ -1,2 +1,1 @@
-# sample
-sample code
+# 代码示例
