@@ -6,4 +6,4 @@ ubuntu
 sudo apt-get install thrift-compiler 
 
 生成
-thrift -o . -gen java ~/workspace/me/sample/src/main/java/code/sample/thrift/service/HelloService.thrift
+thrift -o . -gen java ~/workspace/me/sample/src/main/java/examples/showcase/thrift/service/HelloService.thrift
