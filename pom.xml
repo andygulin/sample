@@ -24,10 +24,10 @@
 		<compile.level>1.7</compile.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<spring.version>4.2.5.RELEASE</spring.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
 		<mongo-java-driver.version>3.2.2</mongo-java-driver.version>
 		<jedis.version>2.8.1</jedis.version>
-		<redisson.version>2.2.11</redisson.version>
+		<redisson.version>2.2.13</redisson.version>
 		<lettuce.version>3.3.2.Final</lettuce.version>
 
 		<javassist.version>3.20.0-GA</javassist.version>
@@ -49,12 +49,12 @@
 		<commons-digester3.version>3.2</commons-digester3.version>
 
 		<zxing.version>3.2.1</zxing.version>
-		<gson.version>2.5</gson.version>
+		<gson.version>2.6.2</gson.version>
 		<guava.version>19.0</guava.version>
 		<guice.version>4.0</guice.version>
 		<dd-plist.version>1.16</dd-plist.version>
 
-		<jsoup.version>1.8.3</jsoup.version>
+		<jsoup.version>1.9.1</jsoup.version>
 		<httpcore.version>4.4.4</httpcore.version>
 		<httpclient.version>4.5.1</httpclient.version>
 		<httpmime.version>4.5.1</httpmime.version>
@@ -89,7 +89,7 @@
 
 		<jsch.version>0.1.53</jsch.version>
 		<sshj.version>0.10.0</sshj.version>
-		<quartz.version>2.2.2</quartz.version>
+		<quartz.version>2.2.3</quartz.version>
 
 		<sqlite-jdbc.version>3.8.11.2</sqlite-jdbc.version>
 		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
@@ -98,15 +98,15 @@
 		<xapool.version>1.5.0</xapool.version>
 		<proxool.version>0.8.3</proxool.version>
 		<HikariCP.version>1.4.0</HikariCP.version>
-		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
 		<jtds.version>1.3.1</jtds.version>
-		<h2.version>1.4.190</h2.version>
+		<h2.version>1.4.191</h2.version>
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
-		<druid.version>1.0.17</druid.version>
+		<druid.version>1.0.19</druid.version>
 		<vibur-dbcp.version>5.0</vibur-dbcp.version>
 		<postgresql.version>9.4-1206-jdbc42</postgresql.version>
 
-		<zt-zip.version>1.8</zt-zip.version>
+		<zt-zip.version>1.9</zt-zip.version>
 
 		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.7.13</slf4j.version>
@@ -123,15 +123,15 @@
 		<jdo-api.version>3.0.1</jdo-api.version>
 		<xerces.version>2.11.0</xerces.version>
 
-		<fastjson.version>1.2.7</fastjson.version>
+		<fastjson.version>1.2.11</fastjson.version>
 		<jackson1.version>1.9.13</jackson1.version>
-		<jackson2.version>2.6.4</jackson2.version>
-		<genson.version>1.3</genson.version>
+		<jackson2.version>2.7.4</jackson2.version>
+		<genson.version>1.4</genson.version>
 
 		<thrift.version>0.9.3</thrift.version>
 		<zookeeper.version>3.4.6</zookeeper.version>
 		<zkclient.version>0.7</zkclient.version>
-		<curator-framework.version>3.0.0</curator-framework.version>
+		<curator-framework.version>3.1.0</curator-framework.version>
 
 		<joda-time.version>2.9.3</joda-time.version>
 
