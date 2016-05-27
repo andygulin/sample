@@ -54,7 +54,7 @@
 		<guice.version>4.0</guice.version>
 		<dd-plist.version>1.16</dd-plist.version>
 
-		<jsoup.version>1.9.1</jsoup.version>
+		<jsoup.version>1.9.2</jsoup.version>
 		<httpcore.version>4.4.4</httpcore.version>
 		<httpclient.version>4.5.1</httpclient.version>
 		<httpmime.version>4.5.1</httpmime.version>
