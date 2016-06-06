@@ -15,6 +15,8 @@ import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -23,6 +25,8 @@ import org.springframework.core.io.Resource;
 import examples.showcase.User;
 
 public class ScriptTest {
+
+	private static final Logger logger = LogManager.getLogger(ScriptTest.class);
 
 	private ScriptEngineManager engineManager;
 
@@ -34,17 +38,17 @@ public class ScriptTest {
 	@Test
 	public void engineFactories() {
 		List<ScriptEngineFactory> engineFactories = engineManager.getEngineFactories();
-		System.out.println("count: " + engineFactories.size());
-		System.out.println();
+		logger.info("count: " + engineFactories.size());
+		logger.info("");
 		for (ScriptEngineFactory engineFactory : engineFactories) {
-			System.out.println(engineFactory.getEngineName());
-			System.out.println(engineFactory.getEngineVersion());
-			System.out.println(engineFactory.getLanguageName());
-			System.out.println(engineFactory.getLanguageVersion());
-			System.out.println(engineFactory.getExtensions());
-			System.out.println(engineFactory.getMimeTypes());
-			System.out.println(engineFactory.getNames());
-			System.out.println();
+			logger.info(engineFactory.getEngineName());
+			logger.info(engineFactory.getEngineVersion());
+			logger.info(engineFactory.getLanguageName());
+			logger.info(engineFactory.getLanguageVersion());
+			logger.info(engineFactory.getExtensions());
+			logger.info(engineFactory.getMimeTypes());
+			logger.info(engineFactory.getNames());
+			logger.info("");
 		}
 	}
 
@@ -52,35 +56,35 @@ public class ScriptTest {
 	public void javascript() throws IOException, ScriptException, NoSuchMethodException {
 		Invocable invoke = getInvocable();
 		Object obj = invoke.invokeFunction("add", 1, 2);
-		System.out.println(obj);
+		logger.info(obj);
 	}
 
 	@Test
 	public void add() throws IOException, ScriptException, NoSuchMethodException {
 		Function function = getFunction();
 		int obj = function.add(1, 2);
-		System.out.println(obj);
+		logger.info(obj);
 	}
 
 	@Test
 	public void list() throws FileNotFoundException, IOException, ScriptException {
 		Function function = getFunction();
 		ArrayList<String> list = function.list();
-		System.out.println(list);
+		logger.info(list);
 	}
 
 	@Test
 	public void maps() throws FileNotFoundException, IOException, ScriptException {
 		Function function = getFunction();
 		HashMap<Integer, String> list = function.maps();
-		System.out.println(list);
+		logger.info(list);
 	}
 
 	@Test
 	public void users() throws FileNotFoundException, IOException, ScriptException {
 		Function function = getFunction();
 		ArrayList<User> list = function.users();
-		System.out.println(list);
+		logger.info(list);
 	}
 
 	@Test

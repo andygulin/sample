@@ -12,6 +12,8 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.BsonInt32;
 import org.bson.BsonInt64;
 import org.bson.Document;
@@ -38,6 +40,8 @@ import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.Filters;
 
 public class MongodbTest {
+
+	private static final Logger logger = LogManager.getLogger(MongodbTest.class);
 
 	private MongoClient client = null;
 	private MongoDatabase db = null;
@@ -69,7 +73,7 @@ public class MongodbTest {
 	public void dbs() {
 		Collection<DB> dbs = client.getUsedDatabases();
 		for (DB db : dbs) {
-			System.out.println(db);
+			logger.info(db);
 		}
 	}
 
@@ -89,24 +93,24 @@ public class MongodbTest {
 		iter.forEach(new Block<String>() {
 			@Override
 			public void apply(String t) {
-				System.out.println(t);
+				logger.info(t);
 			}
 		});
 
-		System.out.println(StringUtils.repeat("=", 80));
+		logger.info(StringUtils.repeat("=", 80));
 
 		ListCollectionsIterable<Document> iterable = db.listCollections();
 		MongoCursor<Document> cursor = iterable.iterator();
 		while (cursor.hasNext()) {
 			Document doc = cursor.next();
-			System.out.println(doc.getString("name"));
+			logger.info(doc.getString("name"));
 		}
 	}
 
 	@Test
 	public void codecRegistry() {
 		CodecRegistry registry = db.getCodecRegistry();
-		System.out.println(registry);
+		logger.info(registry);
 	}
 
 	@Test
@@ -114,12 +118,12 @@ public class MongodbTest {
 		Document document = new Document().append("name", "aaa").append("age", new BsonInt32(11))
 				.append("money", new BsonInt64(1836238L)).append("createAt", new Date());
 		collection.insertOne(document);
-		System.out.println(document.get("_id"));
+		logger.info(document.get("_id"));
 
 		document = new Document().append("name", "bbb").append("age", new BsonInt32(12))
 				.append("money", new BsonInt64(7298368L)).append("createAt", new Date());
 		collection.insertOne(document);
-		System.out.println(document.get("_id"));
+		logger.info(document.get("_id"));
 	}
 
 	@Test
@@ -140,14 +144,14 @@ public class MongodbTest {
 	@Test
 	public void count() {
 		long count = collection.count();
-		System.out.println(count);
+		logger.info(count);
 	}
 
 	@Test
 	public void findOne() {
 		FindIterable<Document> iter = collection.find(Filters.eq("name", "aaa"));
 		Document doc = iter.first();
-		System.out.println(doc.toJson());
+		logger.info(doc.toJson());
 	}
 
 	@Test
@@ -155,7 +159,7 @@ public class MongodbTest {
 		MongoCursor<Document> cursor = collection.find().iterator();
 		while (cursor.hasNext()) {
 			Document doc = cursor.next();
-			System.out.println(doc.toJson());
+			logger.info(doc.toJson());
 		}
 		cursor.close();
 	}
@@ -172,7 +176,7 @@ public class MongodbTest {
 		MongoCursor<Document> cursor = iter.iterator();
 		while (cursor.hasNext()) {
 			Document doc = cursor.next();
-			System.out.println(doc.toJson());
+			logger.info(doc.toJson());
 		}
 		cursor.close();
 	}

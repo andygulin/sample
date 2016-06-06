@@ -9,6 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -55,6 +57,8 @@ public class MavenVersionCheck {
 
 class RequestVersion implements Runnable {
 
+	private static final Logger logger = LogManager.getLogger(RequestVersion.class);
+
 	private Entry<String, String> data;
 
 	public RequestVersion(Entry<String, String> data) {
@@ -75,10 +79,10 @@ class RequestVersion implements Runnable {
 		Elements els = doc.select("a.vbtn.release");
 		if (els != null && els.size() > 0) {
 			lists = els.subList(0, 1);
-			System.out.println(key + " -> " + lists.get(0).text());
-			System.out.println(StringUtils.repeat("*", 80));
+			logger.info(key + " -> " + lists.get(0).text());
+			logger.info(StringUtils.repeat("*", 80));
 		} else {
-			System.out.println("no release version");
+			logger.info("no release version");
 		}
 	}
 }

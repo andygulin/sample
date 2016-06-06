@@ -11,9 +11,13 @@ import org.apache.commons.codec.language.RefinedSoundex;
 import org.apache.commons.codec.language.Soundex;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class CodecTest {
+
+	private static final Logger logger = LogManager.getLogger(CodecTest.class);
 
 	private final String str = "hello";
 	private final File file = new File("pom.xml");
@@ -31,18 +35,18 @@ public class CodecTest {
 	@Test
 	public void base64() {
 		byte[] b = Base64.encodeBase64(str.getBytes());
-		System.out.println(new String(b));
+		logger.info(new String(b));
 		byte[] s = Base64.decodeBase64(b);
-		System.out.println(new String(s));
+		logger.info(new String(s));
 	}
 
 	private void hex(String methodName) throws Exception {
 		String result = (String) MethodUtils.invokeStaticMethod(DigestUtils.class, methodName, str);
-		System.out.println("string: " + str + " -> " + result);
+		logger.info("string: " + str + " -> " + result);
 
 		InputStream is = FileUtils.openInputStream(file);
 		result = (String) MethodUtils.invokeStaticMethod(DigestUtils.class, methodName, is);
-		System.out.println("file: " + file.getName() + " -> " + result);
+		logger.info("file: " + file.getName() + " -> " + result);
 	}
 
 	@Test
@@ -67,9 +71,9 @@ public class CodecTest {
 
 	private void sound(Class<? extends StringEncoder> clazz) throws Exception {
 		StringEncoder encoder = (StringEncoder) clazz.newInstance();
-		System.out.println("hello:" + encoder.encode("hello"));
-		System.out.println("world: " + encoder.encode("world"));
-		System.out.println("extend: " + encoder.encode("extend"));
+		logger.info("hello:" + encoder.encode("hello"));
+		logger.info("world: " + encoder.encode("world"));
+		logger.info("extend: " + encoder.encode("extend"));
 	}
 
 	@Test

@@ -3,6 +3,8 @@ package examples.showcase.guava;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import com.google.common.cache.CacheBuilder;
@@ -10,6 +12,8 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 public class GuavaCache {
+
+	private static final Logger logger = LogManager.getLogger(GuavaCache.class);
 
 	@Test
 	public void test() throws ExecutionException {
@@ -22,8 +26,8 @@ public class GuavaCache {
 				});
 		cache.put("name", "aaa");
 
-		System.out.println(cache.get("name"));
-		System.out.println(cache.get("age"));
-		System.out.println(cache.get("age"));
+		logger.info(cache.get("name"));
+		logger.info(cache.get("age"));
+		logger.info(cache.get("age"));
 	}
 }

@@ -13,7 +13,8 @@ import org.apache.curator.framework.listen.Listenable;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.zookeeper.data.Stat;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ import examples.showcase.User;
 
 public class CuratorTest {
 
-	private static final Logger logger = Logger.getLogger(CuratorTest.class);
+	private static final Logger logger = LogManager.getLogger(CuratorTest.class);
 
 	private CuratorFramework client;
 	private static final String PATH = "/user";
@@ -66,7 +67,7 @@ public class CuratorTest {
 			byte[] data = SerializationUtils.serialize(user);
 			client.create().forPath(PATH, data);
 		} else {
-			System.out.println(PATH + " exist...");
+			logger.info(PATH + " exist...");
 		}
 	}
 

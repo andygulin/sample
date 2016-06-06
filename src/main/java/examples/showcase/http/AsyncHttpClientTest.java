@@ -3,6 +3,8 @@ package examples.showcase.http;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,8 @@ import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 
 public class AsyncHttpClientTest extends AbstractHttpTest {
+
+	private static final Logger logger = LogManager.getLogger(AsyncHttpClientTest.class);
 
 	private AsyncHttpClient client;
 
@@ -37,7 +41,7 @@ public class AsyncHttpClientTest extends AbstractHttpTest {
 			}
 		});
 		String content = future.get();
-		System.out.println(content);
+		logger.info(content);
 	}
 
 	@Test
@@ -46,6 +50,6 @@ public class AsyncHttpClientTest extends AbstractHttpTest {
 		ListenableFuture<Response> future = client.executeRequest(request);
 		Response response = future.get();
 		String content = response.getResponseBody();
-		System.out.println(content);
+		logger.info(content);
 	}
 }

@@ -11,7 +11,8 @@ import org.I0Itec.zkclient.IZkDataListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.ZkConnection;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +22,7 @@ import examples.showcase.User;
 
 public class ZkClientTest {
 
-	private static final Logger logger = Logger.getLogger(ZkClientTest.class);
+	private static final Logger logger = LogManager.getLogger(ZkClientTest.class);
 
 	private ZkClient client;
 	private static final String PATH = "/user";
@@ -44,7 +45,7 @@ public class ZkClientTest {
 	@Test
 	public void read() {
 		User user = client.readData(PATH);
-		System.out.println(user);
+		logger.info(user);
 	}
 
 	@Test

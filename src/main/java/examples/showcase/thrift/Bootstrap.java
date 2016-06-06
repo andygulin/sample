@@ -1,6 +1,7 @@
 package examples.showcase.thrift;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
@@ -15,7 +16,7 @@ import examples.showcase.thrift.service.HelloService;
 
 public class Bootstrap {
 
-	private static final Logger logger = Logger.getLogger(Bootstrap.class);
+	private static final Logger logger = LogManager.getLogger(Bootstrap.class);
 
 	private static final Injector injector;
 

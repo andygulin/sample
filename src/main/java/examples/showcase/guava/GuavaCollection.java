@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import com.google.common.base.Optional;
@@ -33,39 +35,41 @@ import com.google.common.collect.Table;
 
 public class GuavaCollection {
 
+	private static final Logger logger = LogManager.getLogger(GuavaCollection.class);
+
 	@Test
 	public void test() {
 		List<String> list = Lists.newArrayList();
-		System.out.println(list);
+		logger.info(list);
 		list = Lists.newArrayList("aa", "bb", "cc");
-		System.out.println(list);
+		logger.info(list);
 
 		Set<String> set = Sets.newHashSet();
-		System.out.println(set);
+		logger.info(set);
 		set = Sets.newHashSet("aa", "bb", "cc");
-		System.out.println(set);
+		logger.info(set);
 
 		Map<String, String> map = Maps.newHashMap();
-		System.out.println(map);
+		logger.info(map);
 		map = ImmutableMap.of("name", "aa");
-		System.out.println(map);
+		logger.info(map);
 
 		String[] arr = ObjectArrays.newArray(String.class, 10);
-		System.out.println(Arrays.toString(arr));
+		logger.info(Arrays.toString(arr));
 		arr = ObjectArrays.concat("aa", arr);
-		System.out.println(Arrays.toString(arr));
+		logger.info(Arrays.toString(arr));
 	}
 
 	@Test
 	public void test2() {
 		ImmutableList<String> list = ImmutableList.of("aa", "bb", "cc", "dd");
-		System.out.println(list);
+		logger.info(list);
 
 		ImmutableSet<String> set = ImmutableSet.of("aa", "bb", "cc", "dd");
-		System.out.println(set);
+		logger.info(set);
 
 		ImmutableMap<String, String> map = ImmutableMap.of("name", "aa");
-		System.out.println(map);
+		logger.info(map);
 	}
 
 	@Test
@@ -74,34 +78,34 @@ public class GuavaCollection {
 		multimap.put("name", "aa");
 		multimap.put("name", "bb");
 		Collection<String> collection = multimap.get("name");
-		System.out.println(collection);
+		logger.info(collection);
 
 		Multiset<Integer> multiset = HashMultiset.create();
 		multiset.add(10);
 		multiset.add(20);
 		multiset.add(30);
 		multiset.add(30);
-		System.out.println(multiset.count(30));
-		System.out.println(multiset.size());
+		logger.info(multiset.count(30));
+		logger.info(multiset.size());
 
 		Table<Integer, Integer, String> table = HashBasedTable.create();
 		table.put(1, 1, "aa");
 		table.put(1, 2, "bb");
 		table.put(1, 3, "cc");
-		System.out.println(table.get(1, 1));
+		logger.info(table.get(1, 1));
 
 		BiMap<Integer, String> biMap = HashBiMap.create();
 		biMap.put(1, "aa");
 		biMap.put(2, "bb");
 		biMap.put(3, "cc");
-		System.out.println(biMap.get(1));
-		System.out.println(biMap.inverse().get("aa"));
+		logger.info(biMap.get(1));
+		logger.info(biMap.inverse().get("aa"));
 
 		ClassToInstanceMap<Number> classToInstanceMap = MutableClassToInstanceMap.create();
 		classToInstanceMap.put(Integer.class, 11);
 		classToInstanceMap.put(Double.class, 22d);
 		classToInstanceMap.put(Float.class, 33f);
-		System.out.println(classToInstanceMap.getInstance(Integer.class));
+		logger.info(classToInstanceMap.getInstance(Integer.class));
 	}
 
 	@Test
@@ -116,21 +120,21 @@ public class GuavaCollection {
 				}));
 		Optional<ImmutableMultiset<Integer>> optional = Optional.fromNullable(immutableMultiset);
 		if (optional.isPresent()) {
-			System.out.println(optional.get());
+			logger.info(optional.get());
 		}
 	}
 
 	@Test
 	public void test5() {
 		List<Integer> list = Lists.newArrayList(9, 4, 6, 1, 3, 5, 8, 10, 0, 2);
-		System.out.println(Ordering.natural().sortedCopy(list));
-		System.out.println(Ordering.natural().reverse().sortedCopy(list));
-		System.out.println(Ordering.natural().min(list));
-		System.out.println(Ordering.natural().max(list));
+		logger.info(Ordering.natural().sortedCopy(list));
+		logger.info(Ordering.natural().reverse().sortedCopy(list));
+		logger.info(Ordering.natural().min(list));
+		logger.info(Ordering.natural().max(list));
 
 		list = Lists.newArrayList(9, 4, 6, 1, 3, 5, 8, null, 0, 2);
-		System.out.println(Ordering.natural().nullsLast().sortedCopy(list));
-		System.out.println(Ordering.natural().nullsFirst().sortedCopy(list));
+		logger.info(Ordering.natural().nullsLast().sortedCopy(list));
+		logger.info(Ordering.natural().nullsFirst().sortedCopy(list));
 
 		list = Lists.newArrayList(9, 4, 6, 1, 3, 5, 8, 10, 0, 2);
 		Ordering<Integer> ordering = new Ordering<Integer>() {
@@ -139,6 +143,6 @@ public class GuavaCollection {
 				return left - right;
 			}
 		};
-		System.out.println(ordering.immutableSortedCopy(list));
+		logger.info(ordering.immutableSortedCopy(list));
 	}
 }

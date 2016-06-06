@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
 public class JedisTest {
+
+	private static final Logger logger = LogManager.getLogger(JedisTest.class);
 
 	private JedisPool jedisPool;
 	private Jedis jedis;
@@ -38,9 +42,9 @@ public class JedisTest {
 	public void string() {
 		String key = "string";
 		String result = jedis.set(key, "aaa");
-		System.out.println(result);
+		logger.info(result);
 
-		System.out.println(jedis.get(key));
+		logger.info(jedis.get(key));
 	}
 
 	@Test
@@ -48,11 +52,11 @@ public class JedisTest {
 		String key = "list";
 
 		long result = jedis.lpush(key, randomInt(5));
-		System.out.println(result);
+		logger.info(result);
 
 		List<String> list = jedis.lrange(key, 0L, -1L);
 		for (String value : list) {
-			System.out.println(value);
+			logger.info(value);
 		}
 	}
 
@@ -63,16 +67,16 @@ public class JedisTest {
 		String field = "name";
 		String value = "aaa";
 		long result = jedis.hset(key, field, value);
-		System.out.println(result);
+		logger.info(result);
 
 		field = "age";
 		value = "11";
 		result = jedis.hset(key, field, value);
-		System.out.println(result);
+		logger.info(result);
 
 		Map<String, String> hash = jedis.hgetAll(key);
 		for (Entry<String, String> entry : hash.entrySet()) {
-			System.out.println(entry.getKey() + " -> " + entry.getValue());
+			logger.info(entry.getKey() + " -> " + entry.getValue());
 		}
 	}
 
@@ -87,11 +91,11 @@ public class JedisTest {
 			members.put(str, i);
 		}
 		long result = jedis.zadd(key, members);
-		System.out.println(result);
+		logger.info(result);
 
 		Set<Tuple> tuples = jedis.zrangeByScoreWithScores(key, 10d, 20d);
 		for (Tuple tuple : tuples) {
-			System.out.println(new String(tuple.getBinaryElement()) + " -> " + tuple.getScore());
+			logger.info(new String(tuple.getBinaryElement()) + " -> " + tuple.getScore());
 		}
 	}
 
@@ -99,11 +103,11 @@ public class JedisTest {
 	public void set() {
 		String key = "set";
 		long result = jedis.sadd(key, randomInt(5));
-		System.out.println(result);
+		logger.info(result);
 
 		Set<String> sets = jedis.smembers(key);
 		for (String value : sets) {
-			System.out.println(value);
+			logger.info(value);
 		}
 	}
 

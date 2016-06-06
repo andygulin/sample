@@ -51,7 +51,7 @@ public class AvroTest extends BaseTest {
 		GenericRecord user = null;
 		while (dataFileReader.hasNext()) {
 			user = dataFileReader.next(user);
-			System.out.println(user);
+			logger.info(user);
 		}
 		dataFileReader.close();
 	}

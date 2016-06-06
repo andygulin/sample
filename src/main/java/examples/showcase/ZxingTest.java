@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
@@ -30,6 +32,8 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class ZxingTest {
+
+	private static final Logger logger = LogManager.getLogger(ZxingTest.class);
 
 	private static final String CODE_FILE = SystemUtils.IS_OS_WINDOWS ? "C:/website.png" : "/tmp/website.png";
 	private static final String ENCODING = "UTF-8";
@@ -56,6 +60,6 @@ public class ZxingTest {
 		hints.put(DecodeHintType.CHARACTER_SET, ENCODING);
 		Result result = new MultiFormatReader().decode(bitmap, hints);
 		String resultStr = result.getText();
-		System.out.println(resultStr);
+		logger.info(resultStr);
 	}
 }

@@ -12,9 +12,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class HttpClientTest extends AbstractHttpTest {
+
+	private static final Logger logger = LogManager.getLogger(HttpClientTest.class);
 
 	@Test
 	public void request() throws ClientProtocolException, IOException {
@@ -28,7 +32,7 @@ public class HttpClientTest extends AbstractHttpTest {
 			EntityUtils.consume(entity);
 			IOUtils.closeQuietly(is);
 			IOUtils.closeQuietly(httpResponse);
-			System.out.println(result);
+			logger.info(result);
 		}
 	}
 }

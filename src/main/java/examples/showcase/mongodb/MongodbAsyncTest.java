@@ -3,6 +3,8 @@ package examples.showcase.mongodb;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +24,8 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.connection.ClusterSettings;
 
 public class MongodbAsyncTest {
+
+	private static final Logger logger = LogManager.getLogger(MongodbAsyncTest.class);
 
 	private MongoClient client = null;
 	private MongoDatabase db = null;
@@ -45,7 +49,7 @@ public class MongodbAsyncTest {
 		collection.insertOne(document, new SingleResultCallback<Void>() {
 			@Override
 			public void onResult(Void result, Throwable t) {
-				System.out.println("inserted");
+				logger.info("inserted");
 			}
 		});
 
@@ -53,7 +57,7 @@ public class MongodbAsyncTest {
 		collection.insertOne(document, new SingleResultCallback<Void>() {
 			@Override
 			public void onResult(Void result, Throwable t) {
-				System.out.println("inserted");
+				logger.info("inserted");
 			}
 		});
 	}
@@ -64,7 +68,7 @@ public class MongodbAsyncTest {
 		iter.first(new SingleResultCallback<Document>() {
 			@Override
 			public void onResult(Document result, Throwable t) {
-				System.out.println(result.toJson());
+				logger.info(result.toJson());
 			}
 		});
 	}
@@ -74,12 +78,12 @@ public class MongodbAsyncTest {
 		collection.find().forEach(new Block<Document>() {
 			@Override
 			public void apply(Document t) {
-				System.out.println(t.toJson());
+				logger.info(t.toJson());
 			}
 		}, new SingleResultCallback<Void>() {
 			@Override
 			public void onResult(Void result, Throwable t) {
-				System.out.println("done");
+				logger.info("done");
 			}
 		});
 	}

@@ -4,7 +4,12 @@ import static com.google.common.collect.Maps.newHashMap;
 
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class TwentyFour {
+
+	private static final Logger logger = LogManager.getLogger(TwentyFour.class);
 
 	private int[] aArray = new int[2];
 	private int[] bArray = new int[2];
@@ -155,9 +160,9 @@ public class TwentyFour {
 													map.put(new Integer(j), new Integer(j));
 													map.put(new Integer(k), new Integer(k));
 													count += 1;
-													System.out.println("((" + printNumber(m) + printSymbol(i)
-															+ printNumber(n) + ")" + printSymbol(j) + printNumber(o)
-															+ ")" + printSymbol(k) + printNumber(p));
+													logger.info("((" + printNumber(m) + printSymbol(i) + printNumber(n)
+															+ ")" + printSymbol(j) + printNumber(o) + ")"
+															+ printSymbol(k) + printNumber(p));
 												}
 											}
 										}
@@ -172,7 +177,7 @@ public class TwentyFour {
 													map.put(new Integer(j), new Integer(j));
 													map.put(new Integer(k), new Integer(k));
 													count += 1;
-													System.out.println("(" + printNumber(m) + printSymbol(i) + "("
+													logger.info("(" + printNumber(m) + printSymbol(i) + "("
 															+ printNumber(n) + printSymbol(j) + printNumber(o) + "))"
 															+ printSymbol(k) + printNumber(p));
 												}
@@ -189,9 +194,9 @@ public class TwentyFour {
 													map.put(new Integer(j), new Integer(j));
 													map.put(new Integer(k), new Integer(k));
 													count += 1;
-													System.out.println(printNumber(m) + printSymbol(i) + "("
-															+ printNumber(n) + printSymbol(j) + "(" + printNumber(o)
-															+ printSymbol(k) + printNumber(p) + "))");
+													logger.info(printNumber(m) + printSymbol(i) + "(" + printNumber(n)
+															+ printSymbol(j) + "(" + printNumber(o) + printSymbol(k)
+															+ printNumber(p) + "))");
 												}
 											}
 										}
@@ -206,9 +211,9 @@ public class TwentyFour {
 													map.put(new Integer(j), new Integer(j));
 													map.put(new Integer(k), new Integer(k));
 													count += 1;
-													System.out.println(printNumber(m) + printSymbol(i) + "(("
-															+ printNumber(n) + printSymbol(j) + printNumber(o) + ")"
-															+ printSymbol(k) + printNumber(p) + ")");
+													logger.info(printNumber(m) + printSymbol(i) + "((" + printNumber(n)
+															+ printSymbol(j) + printNumber(o) + ")" + printSymbol(k)
+															+ printNumber(p) + ")");
 												}
 											}
 										}
@@ -223,9 +228,9 @@ public class TwentyFour {
 													map.put(new Integer(j), new Integer(j));
 													map.put(new Integer(k), new Integer(k));
 													count += 1;
-													System.out.println("(" + printNumber(m) + printSymbol(i)
-															+ printNumber(n) + ")" + printSymbol(j) + "("
-															+ printNumber(o) + printSymbol(k) + printNumber(p) + ")");
+													logger.info("(" + printNumber(m) + printSymbol(i) + printNumber(n)
+															+ ")" + printSymbol(j) + "(" + printNumber(o)
+															+ printSymbol(k) + printNumber(p) + ")");
 												}
 											}
 										}
@@ -237,7 +242,7 @@ public class TwentyFour {
 				}
 			}
 		}
-		System.out.println("共 " + count + " 种方法");
+		logger.info("共 " + count + " 种方法");
 	}
 
 	public int printNumber(int i) {

@@ -6,8 +6,13 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CommonsCliTest {
+
+	private static final Logger logger = LogManager.getLogger(CommonsCliTest.class);
+
 	public static void main(String[] args) throws ParseException {
 		// 添加命令行参数
 		// -name aaa -age 11 -address shanghai
@@ -21,15 +26,15 @@ public class CommonsCliTest {
 
 		if (cmd.hasOption("name")) {
 			String name = cmd.getOptionValue("name");
-			System.out.println(name);
+			logger.info(name);
 		}
 		if (cmd.hasOption("age")) {
 			String age = cmd.getOptionValue("age");
-			System.out.println(age);
+			logger.info(age);
 		}
 		if (cmd.hasOption("address")) {
 			String address = cmd.getOptionValue("address");
-			System.out.println(address);
+			logger.info(address);
 		}
 	}
 }

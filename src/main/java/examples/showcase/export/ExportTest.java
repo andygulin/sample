@@ -4,11 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 public class ExportTest {
+
+	private static final Logger logger = LogManager.getLogger(ExportTest.class);
 
 	@Test
 	public void export() {
@@ -21,6 +25,6 @@ public class ExportTest {
 		}
 		final String filename = "/tmp/bb.xls";
 		boolean result = new ExportExcel<Employee>(employees, filename, Employee.class).export();
-		System.out.println(result);
+		logger.info(result);
 	}
 }

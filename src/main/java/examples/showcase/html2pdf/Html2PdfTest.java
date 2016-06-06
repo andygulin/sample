@@ -7,12 +7,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
 import com.itextpdf.text.DocumentException;
 
 public class Html2PdfTest {
+
+	private static final Logger logger = LogManager.getLogger(Html2PdfTest.class);
+
 	public static void main(String[] args) throws DocumentException, IOException {
 		Resource htmlResouce = new UrlResource(
 				"http://localhost:8080/aifei-console/medicalrecord/view?type=Pathology&id=1864");
@@ -23,7 +28,7 @@ public class Html2PdfTest {
 		Html2Pdf html2Pdf = new Html2Pdf(inHtml, inCss, pdfFile);
 		boolean success = html2Pdf.create();
 		if (success) {
-			System.out.println(pdfFile);
+			logger.info(pdfFile);
 		}
 	}
 }

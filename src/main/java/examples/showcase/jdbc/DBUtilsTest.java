@@ -27,6 +27,8 @@ import org.apache.commons.dbutils.handlers.KeyedHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +38,8 @@ import org.springframework.core.io.Resource;
 import examples.showcase.User;
 
 public class DBUtilsTest {
+
+	private static final Logger logger = LogManager.getLogger(DBUtilsTest.class);
 
 	private Connection con;
 	private PreparedStatement pstmt;
@@ -52,7 +56,7 @@ public class DBUtilsTest {
 				con = DriverManager.getConnection(properties.getProperty("jdbc.jdbcUrl"),
 						properties.getProperty("jdbc.username"), properties.getProperty("jdbc.password"));
 			} catch (SQLException e) {
-				System.out.println("conn error");
+				logger.info("conn error");
 			}
 		} else {
 			System.err.println("driver error");
@@ -144,7 +148,7 @@ public class DBUtilsTest {
 		String sql = "SELECT `name` FROM `user` WHERE id=?";
 		try {
 			String name = query.query(con, sql, new ScalarHandler<String>("name"), new Object[] { 2 });
-			System.out.println(name);
+			logger.info(name);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +160,7 @@ public class DBUtilsTest {
 		String sql = "SELECT * FROM `user` WHERE id=?";
 		try {
 			Map<String, Object> row = query.query(con, sql, new MapHandler(), new Object[] { 2 });
-			System.out.println(row);
+			logger.info(row);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -168,7 +172,7 @@ public class DBUtilsTest {
 		String sql = "SELECT * FROM `user` WHERE id=?";
 		try {
 			Object[] objs = query.query(con, sql, new ArrayHandler(), new Object[] { 2 });
-			System.out.println(Arrays.toString(objs));
+			logger.info(Arrays.toString(objs));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -180,7 +184,7 @@ public class DBUtilsTest {
 		String sql = "SELECT * FROM `user` WHERE id=?";
 		try {
 			User user = query.query(con, sql, new BeanHandler<User>(User.class), new Object[] { 2 });
-			System.out.println(user);
+			logger.info(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -193,7 +197,7 @@ public class DBUtilsTest {
 		try {
 			List<User> users = query.query(con, sql, new BeanListHandler<User>(User.class));
 			for (User user : users)
-				System.out.println(user);
+				logger.info(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -206,7 +210,7 @@ public class DBUtilsTest {
 		try {
 			List<Object[]> objs = query.query(con, sql, new ArrayListHandler());
 			for (Object[] obj : objs) {
-				System.out.println(Arrays.toString(obj));
+				logger.info(Arrays.toString(obj));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -220,7 +224,7 @@ public class DBUtilsTest {
 		try {
 			Map<String, User> users = query.query(con, sql, new BeanMapHandler<String, User>(User.class, "name"));
 			User user = users.get("111");
-			System.out.println(user);
+			logger.info(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -232,7 +236,7 @@ public class DBUtilsTest {
 		String sql = "SELECT `name` FROM `user`";
 		try {
 			List<String> names = query.query(con, sql, new ColumnListHandler<String>());
-			System.out.println(names);
+			logger.info(names);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -244,7 +248,7 @@ public class DBUtilsTest {
 		String sql = "SELECT `name` FROM `user`";
 		try {
 			List<Map<String, Object>> users = query.query(con, sql, new MapListHandler());
-			System.out.println(users);
+			logger.info(users);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -257,7 +261,7 @@ public class DBUtilsTest {
 		try {
 			Map<String, Map<String, Object>> users = query.query(con, sql, new KeyedHandler<String>("name"));
 			Map<String, Object> user = users.get("111");
-			System.out.println(user);
+			logger.info(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -25,16 +25,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class NIOTest {
+
+	private static final Logger logger = LogManager.getLogger(NIOTest.class);
 
 	@Test
 	public void copyFile() throws IOException {
 		Path source = Paths.get("/home/gulin/文档/svn");
 		Path target = Paths.get("/tmp/svn");
 		target = Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-		System.out.println(target);
+		logger.info(target);
 	}
 
 	@Test
@@ -50,7 +54,7 @@ public class NIOTest {
 		if (!Files.exists(dir)) {
 			Files.createDirectory(Paths.get("/tmp/dir"), PosixFilePermissions.asFileAttribute(permissions));
 		} else {
-			System.out.println(dir + " 已存在...");
+			logger.info(dir + " 已存在...");
 		}
 	}
 
@@ -64,18 +68,18 @@ public class NIOTest {
 	public void readLine() throws IOException {
 		List<String> lines = Files.readAllLines(Paths.get("/tmp/svn"), Charset.forName("UTF-8"));
 		for (String line : lines) {
-			System.out.println(line);
+			logger.info(line);
 		}
 	}
 
 	@Test
 	public void time() throws IOException {
 		Path file = Paths.get("/tmp/svn");
-		System.out.println(Files.getLastModifiedTime(file));
+		logger.info(Files.getLastModifiedTime(file));
 
 		FileTime time = FileTime.fromMillis(new Date().getTime() - 3600);
 		Files.setLastModifiedTime(file, time);
-		System.out.println(Files.getLastModifiedTime(file));
+		logger.info(Files.getLastModifiedTime(file));
 	}
 
 	@Test
@@ -91,27 +95,27 @@ public class NIOTest {
 	public void attr() throws IOException {
 		Path file = Paths.get("/tmp/file");
 		BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
-		System.out.println(attr.fileKey());
-		System.out.println(attr.isDirectory());
-		System.out.println(attr.isOther());
-		System.out.println(attr.isRegularFile());
-		System.out.println(attr.isSymbolicLink());
-		System.out.println(attr.size());
-		System.out.println(attr.creationTime());
-		System.out.println(attr.lastAccessTime());
-		System.out.println(attr.lastModifiedTime());
+		logger.info(attr.fileKey());
+		logger.info(attr.isDirectory());
+		logger.info(attr.isOther());
+		logger.info(attr.isRegularFile());
+		logger.info(attr.isSymbolicLink());
+		logger.info(attr.size());
+		logger.info(attr.creationTime());
+		logger.info(attr.lastAccessTime());
+		logger.info(attr.lastModifiedTime());
 	}
 
 	@Test
 	public void store() throws IOException {
 		FileStore store = Files.getFileStore(Paths.get("/tmp/file"));
-		System.out.println(store.getTotalSpace());
-		System.out.println(store.getUnallocatedSpace());
-		System.out.println(store.getUsableSpace());
-		System.out.println(store.isReadOnly());
-		System.out.println(store.name());
-		System.out.println(store.type());
-		System.out.println(store.getFileStoreAttributeView(FileStoreAttributeView.class));
+		logger.info(store.getTotalSpace());
+		logger.info(store.getUnallocatedSpace());
+		logger.info(store.getUsableSpace());
+		logger.info(store.isReadOnly());
+		logger.info(store.name());
+		logger.info(store.type());
+		logger.info(store.getFileStoreAttributeView(FileStoreAttributeView.class));
 	}
 
 	private static final int BUFFER_SIZE = 512;

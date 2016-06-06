@@ -2,13 +2,14 @@ package examples.showcase.impl;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Maps;
 
 public class BeanFactory {
 
-	private static final Logger logger = Logger.getLogger(BeanFactory.class);
+	private static final Logger logger = LogManager.getLogger(BeanFactory.class);
 
 	private static final Map<String, UserDao> pool = Maps.newConcurrentMap();
 

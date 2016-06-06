@@ -7,10 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class IOTest {
+
+	private static final Logger logger = LogManager.getLogger(IOTest.class);
 
 	private static final int BUFFER_SIZE = 512;
 
@@ -33,7 +37,7 @@ public class IOTest {
 		BufferedInputStream in = new BufferedInputStream(new FileInputStream(new File("/tmp", "aaa")));
 		byte[] b = new byte[BUFFER_SIZE];
 		while ((in.read(b)) != -1) {
-			System.out.println(new String(b));
+			logger.info(new String(b));
 		}
 		in.close();
 	}

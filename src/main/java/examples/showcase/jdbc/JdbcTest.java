@@ -25,6 +25,8 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,6 +35,8 @@ import org.junit.Test;
 import examples.showcase.User;
 
 public class JdbcTest {
+
+	private static final Logger logger = LogManager.getLogger(JdbcTest.class);
 
 	private Connection con;
 	private PreparedStatement pstmt;
@@ -74,7 +78,7 @@ public class JdbcTest {
 		rs = pstmt.getGeneratedKeys();
 		rs.next();
 		int genKey = rs.getInt(1);
-		System.out.println(genKey);
+		logger.info(genKey);
 	}
 
 	@Test
@@ -139,7 +143,7 @@ public class JdbcTest {
 			pstmt.setBlob(2, in);
 			pstmt.setObject(3, new Date());
 			pstmt.executeUpdate();
-			System.out.println(file);
+			logger.info(file);
 		}
 	}
 
@@ -151,13 +155,13 @@ public class JdbcTest {
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
 		while (rs.next()) {
-			System.out.println(rs.getInt("id"));
-			System.out.println(rs.getString("filename"));
+			logger.info(rs.getInt("id"));
+			logger.info(rs.getString("filename"));
 			in = new BufferedInputStream(rs.getBlob("data").getBinaryStream());
 			out = new BufferedOutputStream(new FileOutputStream(new File("/tmp", rs.getString("filename"))));
 			IOUtils.copy(in, out);
-			System.out.println(rs.getTimestamp("createAt"));
-			System.out.println(StringUtils.repeat("=", 80));
+			logger.info(rs.getTimestamp("createAt"));
+			logger.info(StringUtils.repeat("=", 80));
 		}
 	}
 
@@ -206,32 +210,32 @@ public class JdbcTest {
 		for (Object obj : objs) {
 			if (obj instanceof Map) {
 				Map<String, Object> row = (Map<String, Object>) obj;
-				System.out.println("id : " + row.get("id"));
-				System.out.println("name : " + row.get("name"));
-				System.out.println("age : " + row.get("age"));
-				System.out.println("address : " + row.get("address"));
-				System.out.println("createAt : " + row.get("createAt"));
-				System.out.println(StringUtils.repeat("=", 80));
+				logger.info("id : " + row.get("id"));
+				logger.info("name : " + row.get("name"));
+				logger.info("age : " + row.get("age"));
+				logger.info("address : " + row.get("address"));
+				logger.info("createAt : " + row.get("createAt"));
+				logger.info(StringUtils.repeat("=", 80));
 			}
 			if (obj instanceof User) {
 				User user = (User) obj;
-				System.out.println("id : " + user.getId());
-				System.out.println("name : " + user.getName());
-				System.out.println("age : " + user.getAge());
-				System.out.println("address : " + user.getAddress());
-				System.out.println("createAt : " + user.getCreateAt());
-				System.out.println(StringUtils.repeat("=", 80));
+				logger.info("id : " + user.getId());
+				logger.info("name : " + user.getName());
+				logger.info("age : " + user.getAge());
+				logger.info("address : " + user.getAddress());
+				logger.info("createAt : " + user.getCreateAt());
+				logger.info(StringUtils.repeat("=", 80));
 			}
 		}
 	}
 
 	private void print(ResultSet rs) throws SQLException {
-		System.out.println("id : " + rs.getInt("id"));
-		System.out.println("name : " + rs.getString("name"));
-		System.out.println("age : " + rs.getInt("age"));
-		System.out.println("address : " + rs.getString("address"));
-		System.out.println("createAt : " + rs.getTimestamp("createAt"));
-		System.out.println(StringUtils.repeat("=", 80));
+		logger.info("id : " + rs.getInt("id"));
+		logger.info("name : " + rs.getString("name"));
+		logger.info("age : " + rs.getInt("age"));
+		logger.info("address : " + rs.getString("address"));
+		logger.info("createAt : " + rs.getTimestamp("createAt"));
+		logger.info(StringUtils.repeat("=", 80));
 	}
 
 	@After

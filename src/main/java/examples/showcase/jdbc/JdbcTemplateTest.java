@@ -16,6 +16,8 @@ import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +48,8 @@ import com.jolbox.bonecp.BoneCPDataSource;
 import examples.showcase.User;
 
 public class JdbcTemplateTest {
+
+	private static final Logger logger = LogManager.getLogger(JdbcTemplateTest.class);
 
 	private JdbcTemplate jdbcTemplate;
 	private BoneCPDataSource dataSource;
@@ -81,14 +85,14 @@ public class JdbcTemplateTest {
 				ps.setObject(4, new Date());
 			}
 		});
-		System.out.println(result);
+		logger.info(result);
 	}
 
 	@Test
 	public void insert2() {
 		final String sql = "INSERT INTO `user` VALUES(NULL,?,?,?,?)";
 		int result = this.jdbcTemplate.update(sql, "aaa", 14, "beijing", new Date());
-		System.out.println(result);
+		logger.info(result);
 	}
 
 	@Test
@@ -106,8 +110,8 @@ public class JdbcTemplateTest {
 				return ps;
 			}
 		}, holder);
-		System.out.println(result);
-		System.out.println(holder.getKey().intValue());
+		logger.info(result);
+		logger.info(holder.getKey().intValue());
 	}
 
 	@Test
@@ -116,7 +120,7 @@ public class JdbcTemplateTest {
 		Object[] args = { "ccc", 11, "nanjing", new Date() };
 		int[] argTypes = { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.TIMESTAMP };
 		int result = this.jdbcTemplate.update(sql, args, argTypes);
-		System.out.println(result);
+		logger.info(result);
 	}
 
 	@Test
@@ -134,7 +138,7 @@ public class JdbcTemplateTest {
 				return u;
 			}
 		}, 1);
-		System.out.println(user);
+		logger.info(user);
 	}
 
 	@Test
@@ -153,7 +157,7 @@ public class JdbcTemplateTest {
 				return statement.executeUpdate();
 			}
 		});
-		System.out.println(result);
+		logger.info(result);
 	}
 
 	@Test
@@ -172,19 +176,19 @@ public class JdbcTemplateTest {
 				return ps.executeUpdate();
 			}
 		});
-		System.out.println(result);
+		logger.info(result);
 	}
 
 	@Test
 	public void queryObject() {
 		String name = this.jdbcTemplate.queryForObject("SELECT name FROM `user` WHERE id=?", String.class, 1);
-		System.out.println(name);
+		logger.info(name);
 	}
 
 	@Test
 	public void queryObject2() {
 		Integer age = this.jdbcTemplate.queryForObject("SELECT age FROM `user` WHERE id=?", Integer.class, 1);
-		System.out.println(age);
+		logger.info(age);
 	}
 
 	@Test
@@ -196,32 +200,32 @@ public class JdbcTemplateTest {
 						return rs.getString("name");
 					}
 				});
-		System.out.println(name);
+		logger.info(name);
 	}
 
 	@Test
 	public void queryListMap() {
 		List<Map<String, Object>> list = this.jdbcTemplate.queryForList("SELECT * FROM `user`");
-		System.out.println(list);
+		logger.info(list);
 	}
 
 	@Test
 	public void queryListMap2() {
 		List<Map<String, Object>> list = this.jdbcTemplate.query("SELECT * FROM `user`", new ColumnMapRowMapper());
-		System.out.println(list);
+		logger.info(list);
 	}
 
 	@Test
 	public void queryBean() {
 		List<User> users = this.jdbcTemplate.query("SELECT * FROM `user`", new BeanPropertyRowMapper<User>(User.class));
-		System.out.println(users);
+		logger.info(users);
 	}
 
 	@Test
 	public void queryColumn() {
 		List<String> names = this.jdbcTemplate.query("SELECT `name` FROM `user`",
 				new SingleColumnRowMapper<String>(String.class));
-		System.out.println(names);
+		logger.info(names);
 	}
 
 	@Test
@@ -246,7 +250,7 @@ public class JdbcTemplateTest {
 				return users.size();
 			}
 		});
-		System.out.println(Arrays.toString(result));
+		logger.info(Arrays.toString(result));
 	}
 
 	@Test
@@ -258,7 +262,7 @@ public class JdbcTemplateTest {
 		batchArgs.add(new Object[] { "ccc", 13, "nj", new Date() });
 		int[] argTypes = { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.TIMESTAMP };
 		int[] result = this.jdbcTemplate.batchUpdate(sql, batchArgs, argTypes);
-		System.out.println(Arrays.toString(result));
+		logger.info(Arrays.toString(result));
 	}
 
 	@Test
@@ -280,7 +284,7 @@ public class JdbcTemplateTest {
 					}
 				});
 		for (int[] arr : result) {
-			System.out.println(Arrays.toString(arr));
+			logger.info(Arrays.toString(arr));
 		}
 	}
 

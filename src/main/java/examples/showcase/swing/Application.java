@@ -8,6 +8,5 @@ public class Application {
 				new LoginFrame();
 			}
 		}).start();
-		;
 	}
 }

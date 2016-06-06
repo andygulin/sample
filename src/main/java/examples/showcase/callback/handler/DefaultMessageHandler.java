@@ -1,10 +1,11 @@
 package examples.showcase.callback.handler;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DefaultMessageHandler implements MessageHandler {
 
-	private static final Logger logger = Logger.getLogger(DefaultMessageHandler.class);
+	private static final Logger logger = LogManager.getLogger(DefaultMessageHandler.class);
 
 	@Override
 	public void success() {

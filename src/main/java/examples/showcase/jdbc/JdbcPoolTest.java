@@ -12,6 +12,8 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.enhydra.jdbc.standard.StandardXADataSource;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +29,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class JdbcPoolTest {
+
+	private static final Logger logger = LogManager.getLogger(JdbcPoolTest.class);
 
 	private static String USERNAME;
 	private static String PASSWORD;
@@ -120,8 +124,8 @@ public class JdbcPoolTest {
 		Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
 		Connection con = DriverManager.getConnection("proxool.mysql");
 		Connection con2 = DriverManager.getConnection("proxool.mysql2");
-		System.out.println(con);
-		System.out.println(con2);
+		logger.info(con);
+		logger.info(con2);
 		if (con != null) {
 			con.close();
 		}
@@ -139,15 +143,15 @@ public class JdbcPoolTest {
 		ds.setJdbcUrl(URL);
 		ds.setDriverClassName(CLASSNAME);
 		ds.start();
-		System.out.println(ds.getState().name());
+		logger.info(ds.getState().name());
 		process(ds);
 		ds.terminate();
-		System.out.println(ds.getState().name());
+		logger.info(ds.getState().name());
 	}
 
 	private void process(DataSource ds) throws SQLException {
 		Connection con = ds.getConnection();
-		System.out.println(ds);
-		System.out.println(con);
+		logger.info(ds);
+		logger.info(con);
 	}
 }

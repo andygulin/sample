@@ -7,9 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class JdbcConnTest {
+
+	private static final Logger logger = LogManager.getLogger(JdbcConnTest.class);
 
 	@Test
 	public void connMySQL() throws SQLException, ClassNotFoundException {
@@ -18,7 +22,7 @@ public class JdbcConnTest {
 		String user = "root";
 		String password = "root";
 		Connection conn = DriverManager.getConnection(url, user, password);
-		System.out.println(conn);
+		logger.info(conn);
 		conn.close();
 	}
 
@@ -29,7 +33,7 @@ public class JdbcConnTest {
 		String user = "lottery";
 		String password = "lottery123";
 		Connection conn = DriverManager.getConnection(url, user, password);
-		System.out.println(conn);
+		logger.info(conn);
 		conn.close();
 	}
 
@@ -40,7 +44,7 @@ public class JdbcConnTest {
 		String user = "sa";
 		String password = "123456";
 		Connection conn = DriverManager.getConnection(url, user, password);
-		System.out.println(conn);
+		logger.info(conn);
 		conn.close();
 	}
 
@@ -63,7 +67,7 @@ public class JdbcConnTest {
 		}
 		ResultSet rs = stmt.executeQuery("select * from user");
 		while (rs.next()) {
-			System.out.println(rs.getInt("id") + " " + rs.getString("name"));
+			logger.info(rs.getInt("id") + " " + rs.getString("name"));
 		}
 		rs.close();
 		stmt.close();
@@ -88,7 +92,7 @@ public class JdbcConnTest {
 		}
 		ResultSet rs = stmt.executeQuery("select * from user");
 		while (rs.next()) {
-			System.out.println(rs.getInt("id") + " " + rs.getString("name"));
+			logger.info(rs.getInt("id") + " " + rs.getString("name"));
 		}
 		rs.close();
 		stmt.close();
@@ -103,7 +107,7 @@ public class JdbcConnTest {
 		String user = "postgres";
 		String password = "root";
 		Connection conn = DriverManager.getConnection(url, user, password);
-		System.out.println(conn);
+		logger.info(conn);
 		conn.close();
 	}
 }

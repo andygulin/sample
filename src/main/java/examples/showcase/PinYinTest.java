@@ -7,12 +7,16 @@ import static net.sourceforge.pinyin4j.format.HanyuPinyinVCharType.WITH_V;
 
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class PinYinTest {
+
+	private static final Logger logger = LogManager.getLogger(PinYinTest.class);
 
 	@Test
 	public void test() throws BadHanyuPinyinOutputFormatCombination {
@@ -22,6 +26,6 @@ public class PinYinTest {
 		output.setVCharType(WITH_V);
 		char ch = '你';
 		String[] py = toHanyuPinyinStringArray(ch, output);
-		System.out.println(Arrays.toString(py));
+		logger.info(Arrays.toString(py));
 	}
 }

@@ -2,6 +2,8 @@ package examples.showcase;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -17,14 +19,16 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JunitTest {
 
+	private static final Logger logger = LogManager.getLogger(JunitTest.class);
+
 	@Before
 	public void before() {
-		System.out.println("before");
+		logger.info("before");
 	}
 
 	@BeforeClass
 	public static void beforeClass() {
-		System.out.println("beforeClass");
+		logger.info("beforeClass");
 	}
 
 	@Test
@@ -50,11 +54,11 @@ public class JunitTest {
 
 	@After
 	public void after() {
-		System.out.println("after");
+		logger.info("after");
 	}
 
 	@AfterClass
 	public static void afterClass() {
-		System.out.println("afterClass");
+		logger.info("afterClass");
 	}
 }

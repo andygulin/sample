@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +31,8 @@ import org.redisson.core.RSortedSet;
 import org.redisson.core.RTopic;
 
 public class RedissonTest {
+
+	private static final Logger logger = LogManager.getLogger(RedissonTest.class);
 
 	private RedissonClient redisson;
 
@@ -182,20 +186,20 @@ public class RedissonTest {
 
 	private void print(Object obj) {
 		if (obj instanceof Number) {
-			System.out.println(obj);
+			logger.info(obj);
 		}
 		if (obj instanceof String) {
-			System.out.println(obj);
+			logger.info(obj);
 		}
 		if (obj instanceof Collection<?>) {
 			Iterator<?> iter = ((Collection<?>) obj).iterator();
 			while (iter.hasNext()) {
-				System.out.println(iter.next());
+				logger.info(iter.next());
 			}
 		}
 		if (obj instanceof Map<?, ?>) {
 			for (Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
-				System.out.println(entry.getKey() + " : " + entry.getValue());
+				logger.info(entry.getKey() + " : " + entry.getValue());
 			}
 		}
 	}

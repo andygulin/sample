@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,6 +26,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
 public class JsonTest {
+
+	private static final Logger logger = LogManager.getLogger(JsonTest.class);
 
 	private List<Custom> customs;
 
@@ -46,19 +50,19 @@ public class JsonTest {
 
 	private void print(List<Custom> customs) {
 		for (Custom custom : customs) {
-			System.out.println(custom.getId());
-			System.out.println(custom.getName());
+			logger.info(custom.getId());
+			logger.info(custom.getName());
 			for (Order order : custom.getOrders()) {
-				System.out.println("---- " + order.getId() + " " + order.getName());
+				logger.info("---- " + order.getId() + " " + order.getName());
 			}
-			System.out.println();
+			logger.info("");
 		}
 	}
 
 	@Test
 	public void jsonLib() {
 		JSONArray json = JSONArray.fromObject(customs);
-		System.out.println(json);
+		logger.info(json);
 
 		Map<String, Class<?>> classMap = Maps.newHashMap();
 		classMap.put("orders", Order.class);
@@ -74,7 +78,7 @@ public class JsonTest {
 	@Test
 	public void fastJson() {
 		String json = JSON.toJSONString(customs);
-		System.out.println(json);
+		logger.info(json);
 
 		List<Custom> customs = JSON.parseArray(json, Custom.class);
 		print(customs);
@@ -84,7 +88,7 @@ public class JsonTest {
 	public void gson() {
 		Gson gson = new Gson();
 		String json = gson.toJson(customs);
-		System.out.println(json);
+		logger.info(json);
 
 		List<Custom> customs = gson.fromJson(json, new TypeToken<List<Custom>>() {
 		}.getType());
@@ -100,7 +104,7 @@ public class JsonTest {
 		jsonGenerator.flush();
 		jsonGenerator.close();
 		String json = writer.toString();
-		System.out.println(json);
+		logger.info(json);
 
 		Custom[] arrays = objectMapper.readValue(json, Custom[].class);
 		List<Custom> customs = Arrays.asList(arrays);
@@ -111,7 +115,7 @@ public class JsonTest {
 	public void genson() {
 		Genson genson = new Genson();
 		String json = genson.serialize(customs);
-		System.out.println(json);
+		logger.info(json);
 
 		List<Custom> customs = genson.deserialize(json, new GenericType<List<Custom>>() {
 		});

@@ -3,6 +3,8 @@ package examples.showcase.redis;
 import java.util.List;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,8 @@ import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
 public class JedisShardedTest {
+
+	private static final Logger logger = LogManager.getLogger(JedisShardedTest.class);
 
 	private ShardedJedisPool shardedJedisPool;
 	private ShardedJedis shardedJedis;
@@ -42,7 +46,7 @@ public class JedisShardedTest {
 	@Test
 	public void get() {
 		String name = shardedJedis.get("name");
-		System.out.println(name);
+		logger.info(name);
 	}
 
 	@After
