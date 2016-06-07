@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import examples.showcase.User;
 
-public class CuratorTest {
+public class CuratorTest extends ZookeeperTest {
 
 	private static final Logger logger = LogManager.getLogger(CuratorTest.class);
 
@@ -39,7 +39,7 @@ public class CuratorTest {
 
 	@Before
 	public void init() {
-		Builder builder = CuratorFrameworkFactory.builder().connectString("localhost:2181").sessionTimeoutMs(30000)
+		Builder builder = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
 				.connectionTimeoutMs(30000).canBeReadOnly(false)
 				.retryPolicy(new ExponentialBackoffRetry(1000, Integer.MAX_VALUE)).defaultData(null);
 		client = builder.build();

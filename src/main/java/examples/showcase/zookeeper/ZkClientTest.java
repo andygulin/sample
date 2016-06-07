@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import examples.showcase.User;
 
-public class ZkClientTest {
+public class ZkClientTest extends ZookeeperTest {
 
 	private static final Logger logger = LogManager.getLogger(ZkClientTest.class);
 
@@ -29,7 +29,7 @@ public class ZkClientTest {
 
 	@Before
 	public void init() throws IOException {
-		IZkConnection connection = new ZkConnection("localhost:2181");
+		IZkConnection connection = new ZkConnection(SERVERS);
 		client = new ZkClient(connection, 3000);
 		client.subscribeChildChanges(PATH, new ZkChildListener());
 		client.subscribeDataChanges(PATH, new ZkDataListener());
