@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import examples.showcase.User;
 
-public class ZkClientTest extends ZookeeperTest {
+public class ZkClientTest extends ZooKeeperClientBaseTest {
 
 	private static final Logger logger = LogManager.getLogger(ZkClientTest.class);
 

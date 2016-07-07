@@ -8,7 +8,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-public abstract class ZookeeperTest {
+public abstract class ZooKeeperClientBaseTest {
 
 	protected static String SERVERS = "";
 

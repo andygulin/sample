@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import examples.showcase.User;
 
-public class CuratorTest extends ZookeeperTest {
+public class CuratorTest extends ZooKeeperClientBaseTest {
 
 	private static final Logger logger = LogManager.getLogger(CuratorTest.class);
 
