@@ -1,17 +1,21 @@
 package examples.showcase;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
 import org.dom4j.Element;
@@ -22,18 +26,18 @@ import org.jdom.output.XMLOutputter;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
-
 public class XmlTest {
+
+	private static final Logger logger = LogManager.getLogger(XmlTest.class);
 
 	private List<User> users;
 	private static final int LIST_SIZE = 10000;
-	private static final String DOM4J_FILE = SystemUtils.IS_OS_WINDOWS ? "C:/a.xml" : "/tmp/a.xml";
-	private static final String JDOM_FILE = SystemUtils.IS_OS_WINDOWS ? "C:/b.xml" : "/tmp/b.xml";
+	private static final File DOM4J_FILE = new File(FileUtils.getTempDirectoryPath(), "a.xml");
+	private static final File JDOM_FILE = new File(FileUtils.getTempDirectoryPath(), "b.xml");
 
 	@Before
 	public void before() {
-		users = Lists.newArrayListWithCapacity(LIST_SIZE);
+		users = new ArrayList<>(LIST_SIZE);
 		for (int i = 1; i <= LIST_SIZE; i++) {
 			users.add(new User(i, "姓名" + random(), random(), "shanghai", new Date()));
 		}
@@ -64,6 +68,7 @@ public class XmlTest {
 		writer.write(doc);
 		writer.flush();
 		writer.close();
+		logger.info(DOM4J_FILE);
 	}
 
 	@Test
@@ -92,5 +97,7 @@ public class XmlTest {
 		output.output(doc, os);
 
 		IOUtils.closeQuietly(os);
+
+		logger.info(JDOM_FILE);
 	}
 }

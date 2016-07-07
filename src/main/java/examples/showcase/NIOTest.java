@@ -118,16 +118,31 @@ public class NIOTest {
 		logger.info(store.getFileStoreAttributeView(FileStoreAttributeView.class));
 	}
 
+	private static final String DEFAULT_CHARSET_STR = "UTF-8";
+	private static final Charset DEFAULT_CHARSET = Charset.forName(DEFAULT_CHARSET_STR);
 	private static final int BUFFER_SIZE = 512;
 
 	@Test
 	public void buffer() {
 		ByteBuffer byteBuffer = ByteBuffer.allocate(BUFFER_SIZE);
+		logger.info(byteBuffer);
+
 		CharBuffer charBuffer = CharBuffer.allocate(BUFFER_SIZE);
+		logger.info(charBuffer);
+
 		ShortBuffer shortBuffer = ShortBuffer.allocate(BUFFER_SIZE);
+		logger.info(shortBuffer);
+
 		IntBuffer intBuffer = IntBuffer.allocate(BUFFER_SIZE);
+		logger.info(intBuffer);
+
 		FloatBuffer floatBuffer = FloatBuffer.allocate(BUFFER_SIZE);
+		logger.info(floatBuffer);
+
 		DoubleBuffer doubleBuffer = DoubleBuffer.allocate(BUFFER_SIZE);
+		logger.info(doubleBuffer);
+
 		LongBuffer longBuffer = LongBuffer.allocate(BUFFER_SIZE);
+		logger.info(longBuffer);
 	}
 }
