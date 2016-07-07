@@ -1,12 +1,10 @@
 package examples.showcase.html2pdf;
 
-import static org.apache.commons.io.FileUtils.getFile;
-import static org.apache.commons.io.FileUtils.getTempDirectory;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.Resource;
@@ -24,11 +22,13 @@ public class Html2PdfTest {
 		Resource cssResource = new UrlResource("http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css");
 		InputStream inHtml = htmlResouce.getInputStream();
 		InputStream inCss = cssResource.getInputStream();
-		File pdfFile = getFile(getTempDirectory(), "abc.pdf");
+		File pdfFile = FileUtils.getFile(FileUtils.getTempDirectory(), "abc.pdf");
 		Html2Pdf html2Pdf = new Html2Pdf(inHtml, inCss, pdfFile);
 		boolean success = html2Pdf.create();
 		if (success) {
 			logger.info(pdfFile);
+		} else {
+			logger.info("error");
 		}
 	}
 }

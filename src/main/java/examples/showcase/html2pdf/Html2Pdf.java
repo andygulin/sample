@@ -1,19 +1,17 @@
 package examples.showcase.html2pdf;
 
-import static com.itextpdf.text.PageSize.A4;
-import static com.itextpdf.text.pdf.BaseFont.NOT_EMBEDDED;
-import static com.itextpdf.text.pdf.BaseFont.createFont;
-import static org.apache.commons.io.FileUtils.openOutputStream;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+import org.apache.commons.io.FileUtils;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerFontProvider;
@@ -35,9 +33,9 @@ public class Html2Pdf {
 
 	public boolean create() {
 		boolean success = true;
-		Document doc = new Document(A4.rotate(), 50, 50, 50, 50);
+		Document doc = new Document(PageSize.A4.rotate(), 50, 50, 50, 50);
 		try {
-			PdfWriter writer = PdfWriter.getInstance(doc, openOutputStream(pdfFile));
+			PdfWriter writer = PdfWriter.getInstance(doc, FileUtils.openOutputStream(pdfFile));
 			doc.open();
 			XMLWorkerHelper.getInstance().parseXHtml(writer, doc, html, css, DEFAULT_CHATSET, new STFontProvider());
 		} catch (DocumentException | IOException e) {
@@ -49,21 +47,20 @@ public class Html2Pdf {
 		return success;
 	}
 
-}
+	private static class STFontProvider extends XMLWorkerFontProvider {
 
-class STFontProvider extends XMLWorkerFontProvider {
-
-	@Override
-	public Font getFont(String fontname, String encoding, boolean embedded, float size, int style, BaseColor color) {
-		BaseFont bf = null;
-		try {
-			bf = createFont("STSong-Light", "UniGB-UCS2-H", NOT_EMBEDDED);
-		} catch (DocumentException | IOException e) {
-			e.printStackTrace();
+		@Override
+		public Font getFont(String fontname, String encoding, boolean embedded, float size, int style,
+				BaseColor color) {
+			BaseFont bf = null;
+			try {
+				bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+			} catch (DocumentException | IOException e) {
+				e.printStackTrace();
+			}
+			Font font = new Font(bf, size, style, color);
+			font.setColor(color);
+			return font;
 		}
-		Font font = new Font(bf, size, style, color);
-		font.setColor(color);
-		return font;
 	}
-
 }
