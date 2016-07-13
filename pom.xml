@@ -79,13 +79,13 @@
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 
 		<freemarker.version>2.3.23</freemarker.version>
-		<pinyin4j.version>2.5.0</pinyin4j.version>
+		<pinyin4j.version>2.5.1</pinyin4j.version>
 
 		<protostuff.version>1.0.9</protostuff.version>
 		<kryo.version>2.24.0</kryo.version>
 		<hessian.version>4.0.38</hessian.version>
 		<msgpack.version>0.6.12</msgpack.version>
-		<avro.version>1.8.0</avro.version>
+		<avro.version>1.8.1</avro.version>
 
 		<jsch.version>0.1.53</jsch.version>
 		<sshj.version>0.10.0</sshj.version>
@@ -97,12 +97,12 @@
 		<c3p0.version>0.9.5.2</c3p0.version>
 		<xapool.version>1.5.0</xapool.version>
 		<proxool.version>0.8.3</proxool.version>
-		<HikariCP.version>2.4.6</HikariCP.version>
-		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
+		<HikariCP.version>2.4.7</HikariCP.version>
+		<mysql-connector-java.version>6.0.3</mysql-connector-java.version>
 		<jtds.version>1.3.1</jtds.version>
 		<h2.version>1.4.192</h2.version>
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
-		<druid.version>1.0.20</druid.version>
+		<druid.version>1.0.22</druid.version>
 		<vibur-dbcp.version>9.0</vibur-dbcp.version>
 		<postgresql.version>9.4.1208.jre7</postgresql.version>
 
@@ -125,13 +125,13 @@
 
 		<fastjson.version>1.2.12</fastjson.version>
 		<jackson1.version>1.9.13</jackson1.version>
-		<jackson2.version>2.7.4</jackson2.version>
+		<jackson2.version>2.8.0</jackson2.version>
 		<genson.version>1.4</genson.version>
 
 		<thrift.version>0.9.3</thrift.version>
 		<zookeeper.version>3.4.8</zookeeper.version>
 		<zkclient.version>0.9</zkclient.version>
-		<curator-framework.version>3.1.0</curator-framework.version>
+		<curator-framework.version>3.2.0</curator-framework.version>
 
 		<joda-time.version>2.9.4</joda-time.version>
 
