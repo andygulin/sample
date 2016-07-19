@@ -148,6 +148,8 @@
 		<ehcache.version>3.1.0</ehcache.version>
 		<cache-api.version>1.0.0</cache-api.version>
 
+		<markdown4j.version>2.2-cj-1.1</markdown4j.version>
+
 		<maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
 		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
@@ -850,6 +852,12 @@
 			<artifactId>cache-api</artifactId>
 			<version>${cache-api.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.commonjava.googlecode.markdown4j</groupId>
+			<artifactId>markdown4j</artifactId>
+			<version>${markdown4j.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 
