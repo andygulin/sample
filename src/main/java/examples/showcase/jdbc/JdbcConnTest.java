@@ -18,7 +18,7 @@ public class JdbcConnTest {
 	@Test
 	public void connMySQL() throws SQLException, ClassNotFoundException {
 		Class.forName("org.gjt.mm.mysql.Driver");
-		String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8";
+		String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
 		String user = "root";
 		String password = "root";
 		Connection conn = DriverManager.getConnection(url, user, password);
