@@ -25,8 +25,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<spring.version>4.3.1.RELEASE</spring.version>
-		<mongo-java-driver.version>3.2.2</mongo-java-driver.version>
-		<jedis.version>2.8.1</jedis.version>
+		<mongo-java-driver.version>3.3.0</mongo-java-driver.version>
+		<jedis.version>2.9.0</jedis.version>
 		<redisson.version>2.2.21</redisson.version>
 		<lettuce.version>4.2.1.Final</lettuce.version>
 
@@ -108,7 +108,7 @@
 
 		<zt-zip.version>1.9</zt-zip.version>
 
-		<log4j.version>2.6</log4j.version>
+		<log4j.version>2.6.2</log4j.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.1.7</logback.version>
 
@@ -119,13 +119,13 @@
 		<jta.version>1.1</jta.version>
 		<jotm.version>2.2.3</jotm.version>
 		<annotation-api.version>1.2</annotation-api.version>
-		<servlet-api.version>3.0.1</servlet-api.version>
+		<servlet-api.version>3.1.0</servlet-api.version>
 		<jdo-api.version>3.0.1</jdo-api.version>
 		<xerces.version>2.11.0</xerces.version>
 
-		<fastjson.version>1.2.12</fastjson.version>
+		<fastjson.version>1.2.14</fastjson.version>
 		<jackson1.version>1.9.13</jackson1.version>
-		<jackson2.version>2.8.0</jackson2.version>
+		<jackson2.version>2.8.1</jackson2.version>
 		<genson.version>1.4</genson.version>
 
 		<thrift.version>0.9.3</thrift.version>
