@@ -1,12 +1,14 @@
 package examples.showcase;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class User implements Comparable<User>, Serializable {
+
 	private static final long serialVersionUID = 8276648076669784264L;
+
 	private Integer id;
 	private String name;
 	private Integer age;
@@ -82,6 +84,6 @@ public class User implements Comparable<User>, Serializable {
 
 	@Override
 	public String toString() {
-		return reflectionToString(this);
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

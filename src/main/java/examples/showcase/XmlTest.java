@@ -59,7 +59,7 @@ public class XmlTest {
 			user.addElement("name").addText(u.getName());
 			user.addElement("age").addText(String.valueOf(u.getAge()));
 			user.addElement("address").addText(u.getAddress());
-			user.addElement("createDate").addText(DateFormatUtils.format(u.getCreateAt(), "yyyy-MM-dd HH:mm:ss"));
+			user.addElement("createDate").addText(DateFormatUtils.ISO_DATETIME_FORMAT.format(u.getCreateAt()));
 		}
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
@@ -84,7 +84,7 @@ public class XmlTest {
 			user.addContent(new org.jdom.Element("age").setText(String.valueOf(u.getAge())));
 			user.addContent(new org.jdom.Element("address").setText(u.getAddress()));
 			user.addContent(new org.jdom.Element("createDate")
-					.setText(DateFormatUtils.format(u.getCreateAt(), "yyyy-MM-dd HH:mm:ss")));
+					.setText(DateFormatUtils.ISO_DATETIME_FORMAT.format(u.getCreateAt())));
 			root.addContent(user);
 		}
 		doc.setRootElement(root);

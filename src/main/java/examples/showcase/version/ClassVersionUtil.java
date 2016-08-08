@@ -67,5 +67,4 @@ public class ClassVersionUtil {
 		}
 		return StringUtils.join(message, "\n");
 	}
-
 }

@@ -1,7 +1,6 @@
 package examples.showcase;
 
-import static com.google.common.collect.Maps.newHashMap;
-
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -118,7 +117,7 @@ public class TwentyFour {
 	}
 
 	private void core(int[] a, int[] b, int[] c, int[] d) {
-		Map<Integer, Integer> map = newHashMap();
+		Map<Integer, Integer> map = new HashMap<>();
 
 		int count = 0;
 

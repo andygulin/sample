@@ -22,5 +22,4 @@ public class JfreechartTest {
 		JFreeChart chart = ChartFactory.createPieChart("某公司人员组织数据图", dataset, true, true, false);
 		ChartUtilities.saveChartAsPNG(new File(FileUtils.getTempDirectoryPath(), "pie.png"), chart, 800, 800);
 	}
-
 }

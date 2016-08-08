@@ -1,7 +1,6 @@
 package examples.showcase;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,6 +35,7 @@ public class ZxingTest {
 	private static final Logger logger = LogManager.getLogger(ZxingTest.class);
 	private static final String CODE_DIR = FileUtils.getTempDirectoryPath();
 	private static final String CODE_FILE = "website.png";
+	private static final Path file = Paths.get(CODE_DIR, CODE_FILE);
 	private static final String ENCODING = "UTF-8";
 	private static final int HEIGHT = 400;
 	private static final int WEIGHT = 400;
@@ -48,16 +48,14 @@ public class ZxingTest {
 		hints.put(EncodeHintType.CHARACTER_SET, ENCODING);
 		hints.put(EncodeHintType.MARGIN, 0);
 		BitMatrix bitMatrix = new MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, WEIGHT, HEIGHT, hints);
-		Path path = Paths.get(CODE_DIR, CODE_FILE);
-		MatrixToImageWriter.writeToPath(bitMatrix, "png", path);
-		logger.info(path);
+		MatrixToImageWriter.writeToPath(bitMatrix, "png", file);
+		logger.info(file);
 	}
 
 	@Test
 	public void decode() throws IOException, NotFoundException {
-		File file = new File(CODE_DIR, CODE_FILE);
 		logger.info(file);
-		BufferedImage image = ImageIO.read(file);
+		BufferedImage image = ImageIO.read(file.toFile());
 		LuminanceSource source = new BufferedImageLuminanceSource(image);
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 		Map<DecodeHintType, Object> hints = new HashMap<>();
