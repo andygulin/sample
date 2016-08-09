@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -41,7 +42,6 @@ import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.google.common.collect.Lists;
 import com.jolbox.bonecp.BoneCPConfig;
 import com.jolbox.bonecp.BoneCPDataSource;
 
@@ -231,7 +231,7 @@ public class JdbcTemplateTest {
 	@Test
 	public void batch() {
 		final String sql = "INSERT INTO `user` VALUES(NULL,?,?,?,?)";
-		final List<User> users = Lists.newArrayList();
+		final List<User> users = new ArrayList<>();
 		users.add(new User(null, "aaa", 11, "sh", new Date()));
 		users.add(new User(null, "bbb", 12, "bj", new Date()));
 		users.add(new User(null, "ccc", 13, "nj", new Date()));
@@ -256,7 +256,7 @@ public class JdbcTemplateTest {
 	@Test
 	public void batch2() {
 		final String sql = "INSERT INTO `user` VALUES(NULL,?,?,?,?)";
-		List<Object[]> batchArgs = Lists.newArrayList();
+		List<Object[]> batchArgs = new ArrayList<>();
 		batchArgs.add(new Object[] { "aaa", 11, "sh", new Date() });
 		batchArgs.add(new Object[] { "bbb", 12, "bj", new Date() });
 		batchArgs.add(new Object[] { "ccc", 13, "nj", new Date() });
@@ -268,7 +268,7 @@ public class JdbcTemplateTest {
 	@Test
 	public void batch3() {
 		final String sql = "INSERT INTO `user` VALUES(NULL,?,?,?,?)";
-		List<User> batchArgs = Lists.newArrayList();
+		List<User> batchArgs = new ArrayList<>();
 		batchArgs.add(new User(null, "aaa", 11, "sh", new Date()));
 		batchArgs.add(new User(null, "bbb", 12, "bj", new Date()));
 		batchArgs.add(new User(null, "ccc", 13, "nj", new Date()));
@@ -293,7 +293,7 @@ public class JdbcTemplateTest {
 		/*
 		 * INSERT INTO `user` VALUES(NULL,'aaa',11,'sh',NOW());
 		 */
-		List<SqlParameter> declaredParameters = Lists.newArrayList();
+		List<SqlParameter> declaredParameters = new ArrayList<>();
 		this.jdbcTemplate.call(new CallableStatementCreator() {
 			@Override
 			public CallableStatement createCallableStatement(Connection con) throws SQLException {
@@ -312,7 +312,7 @@ public class JdbcTemplateTest {
 		 * 
 		 * INSERT INTO `user` VALUES(NULL,p_name,p_age,p_address,p_createAt);
 		 */
-		List<SqlParameter> declaredParameters = Lists.newArrayList();
+		List<SqlParameter> declaredParameters = new ArrayList<>();
 		declaredParameters.add(new SqlParameter(Types.VARCHAR));
 		declaredParameters.add(new SqlParameter(Types.INTEGER));
 		declaredParameters.add(new SqlParameter(Types.VARCHAR));
