@@ -1,16 +1,19 @@
 package examples.showcase.db;
 
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DBHelper {
 	private DBHelper() {
@@ -74,7 +77,7 @@ public class DBHelper {
 	}
 
 	public static List<Map<String, Object>> queryList(String sql, Object[] args) {
-		List<Map<String, Object>> list = Lists.newArrayList();
+		List<Map<String, Object>> list = new ArrayList<>();
 		int len = args.length;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -91,13 +94,13 @@ public class DBHelper {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 			int columnCount = rsmd.getColumnCount();
-			List<String> cols = Lists.newArrayListWithCapacity(columnCount);
+			List<String> cols = new ArrayList<>(columnCount);
 			for (int i = 1; i <= columnCount; i++) {
 				cols.add(rsmd.getColumnLabel(i));
 			}
 			Map<String, Object> row = null;
 			while (rs.next()) {
-				row = Maps.newHashMapWithExpectedSize(columnCount);
+				row = new HashMap<>(columnCount);
 				for (String col : cols) {
 					row.put(col, rs.getObject(col));
 				}
@@ -133,12 +136,12 @@ public class DBHelper {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 			int columnCount = rsmd.getColumnCount();
-			List<String> cols = Lists.newArrayListWithCapacity(columnCount);
+			List<String> cols = new ArrayList<>(columnCount);
 			for (int i = 1; i <= columnCount; i++) {
 				cols.add(rsmd.getColumnLabel(i));
 			}
 			rs.next();
-			row = Maps.newHashMapWithExpectedSize(columnCount);
+			row = new HashMap<>(columnCount);
 			for (String col : cols) {
 				row.put(col, rs.getObject(col));
 			}
@@ -259,6 +262,41 @@ public class DBHelper {
 		try {
 			con.commit();
 		} catch (SQLException e) {
+		}
+	}
+
+	private static final class ConnectionFactory {
+		private ConnectionFactory() {
+
+		}
+
+		private static ComboPooledDataSource ds = null;
+		private static ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
+
+		static {
+			String driverClass = bundle.getString("jdbc.driverClass");
+			String jdbcUrl = bundle.getString("jdbc.jdbcUrl");
+			String user = bundle.getString("jdbc.username");
+			String password = bundle.getString("jdbc.password");
+			ds = new ComboPooledDataSource();
+			try {
+				ds.setDriverClass(driverClass);
+			} catch (PropertyVetoException e) {
+				e.printStackTrace();
+			}
+			ds.setJdbcUrl(jdbcUrl);
+			ds.setUser(user);
+			ds.setPassword(password);
+		}
+
+		public static synchronized Connection getConnection() {
+			Connection con = null;
+			try {
+				con = ds.getConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return con;
 		}
 	}
 }

@@ -7,20 +7,19 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class UrlParamUtils {
+public final class Urls {
 
 	private static final String AND = "&";
 	private static final String EQUALS = "=";
 
-	private UrlParamUtils() {
+	private Urls() {
 	}
 
-	public static String build(Map<String, Object> param) {
-		List<String> list = new ArrayList<>(param.size());
-		for (Entry<String, Object> entry : param.entrySet()) {
+	public static String build(Map<String, Object> params) {
+		List<String> list = new ArrayList<>(params.size());
+		for (Entry<String, Object> entry : params.entrySet()) {
 			list.add(entry.getKey() + EQUALS + entry.getValue());
 		}
-		String ret = StringUtils.join(list, AND);
-		return ret;
+		return StringUtils.join(list, AND);
 	}
 }
