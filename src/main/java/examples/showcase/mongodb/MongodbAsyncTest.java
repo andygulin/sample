@@ -1,5 +1,7 @@
 package examples.showcase.mongodb;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.net.UnknownHostException;
 import java.util.List;
 
@@ -20,7 +22,6 @@ import com.mongodb.async.client.MongoClientSettings;
 import com.mongodb.async.client.MongoClients;
 import com.mongodb.async.client.MongoCollection;
 import com.mongodb.async.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import com.mongodb.connection.ClusterSettings;
 
 public class MongodbAsyncTest {
@@ -64,7 +65,7 @@ public class MongodbAsyncTest {
 
 	@Test
 	public void findOne() {
-		FindIterable<Document> iter = collection.find(Filters.eq("name", "aaa"));
+		FindIterable<Document> iter = collection.find(eq("name", "aaa"));
 		iter.first(new SingleResultCallback<Document>() {
 			@Override
 			public void onResult(Document result, Throwable t) {
