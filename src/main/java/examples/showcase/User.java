@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class User implements Comparable<User>, Serializable {
+public class User implements Comparable<User>, Cloneable, Serializable {
 
 	private static final long serialVersionUID = 8276648076669784264L;
 
@@ -85,5 +85,10 @@ public class User implements Comparable<User>, Serializable {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }
