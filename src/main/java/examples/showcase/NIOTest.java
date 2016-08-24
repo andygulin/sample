@@ -66,7 +66,7 @@ public class NIOTest {
 
 	@Test
 	public void readLine() throws IOException {
-		List<String> lines = Files.readAllLines(Paths.get("/tmp/svn"), Charset.forName("UTF-8"));
+		List<String> lines = Files.readAllLines(Paths.get("/tmp/svn"), DEFAULT_CHARSET);
 		for (String line : lines) {
 			logger.info(line);
 		}
@@ -88,7 +88,7 @@ public class NIOTest {
 		List<String> lines = new ArrayList<>();
 		lines.add("aaaa");
 		lines.add("bbbb");
-		Files.write(file, lines, Charset.forName("UTF-8"));
+		Files.write(file, lines, DEFAULT_CHARSET);
 	}
 
 	@Test
