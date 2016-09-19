@@ -38,6 +38,10 @@ public class ZkClientTest extends ZooKeeperClientBaseTest {
 
 	@Test
 	public void create() {
+		boolean exist = client.exists(PATH);
+		if (exist) {
+			client.delete(PATH);
+		}
 		User user = new User(1, "aaa", 11, "shanghai", new Date());
 		client.createPersistent(PATH, user);
 	}

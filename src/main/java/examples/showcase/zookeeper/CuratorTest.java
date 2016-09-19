@@ -40,8 +40,8 @@ public class CuratorTest extends ZooKeeperClientBaseTest {
 	@Before
 	public void init() {
 		Builder builder = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
-				.connectionTimeoutMs(30000).canBeReadOnly(false)
-				.retryPolicy(new ExponentialBackoffRetry(1000, Integer.MAX_VALUE)).defaultData(null);
+				.connectionTimeoutMs(30000).canBeReadOnly(false).retryPolicy(new ExponentialBackoffRetry(1000, 20))
+				.defaultData(null);
 		client = builder.build();
 
 		connectionStateListenable = client.getConnectionStateListenable();
@@ -62,20 +62,19 @@ public class CuratorTest extends ZooKeeperClientBaseTest {
 	@Test
 	public void create() throws Exception {
 		Stat stat = client.checkExists().forPath(PATH);
-		if (stat == null) {
-			User user = new User(1, "aaa", 11, "shanghai", new Date());
-			byte[] data = SerializationUtils.serialize(user);
-			client.create().forPath(PATH, data);
-		} else {
-			logger.info(PATH + " exist...");
+		if (stat != null) {
+			client.delete().forPath(PATH);
 		}
+		User user = new User(1, "aaa", 11, "shanghai", new Date());
+		byte[] data = SerializationUtils.serialize(user);
+		client.create().forPath(PATH, data);
 	}
 
 	@Test
 	public void read() throws Exception {
 		byte[] data = client.getData().forPath(PATH);
 		User user = SerializationUtils.deserialize(data);
-		System.out.println(user);
+		logger.info(user);
 	}
 
 	@Test
