@@ -1,16 +1,11 @@
-package examples.showcase;
+package examples.showcase.image;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -19,23 +14,7 @@ import net.coobird.thumbnailator.builders.ThumbnailParameterBuilder;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.tasks.FileThumbnailTask;
 
-public class ThumbnailsTest {
-
-	private static final String BASE_DIR = FileUtils.getTempDirectoryPath();
-
-	private File source = null;
-	private File watermark = null;
-
-	@Before
-	public void before() throws IOException {
-		Resource resource = new ClassPathResource("images/1.jpg");
-		source = new File(BASE_DIR, "1.jpg");
-		FileUtils.copyFile(resource.getFile(), source);
-
-		resource = new ClassPathResource("images/2.jpg");
-		watermark = new File(BASE_DIR, "2.jpg");
-		FileUtils.copyFile(resource.getFile(), watermark);
-	}
+public class ThumbnailatorTest extends ImageBaseTest {
 
 	@Test
 	public void thumbnails() throws IOException {
@@ -55,13 +34,8 @@ public class ThumbnailsTest {
 
 	@Test
 	public void fileThumbnailTask() throws IOException {
+		File dest3 = new File(BASE_DIR, "1_800x600_3.jpg");
 		ThumbnailParameter parameter = new ThumbnailParameterBuilder().size(800, 600).build();
-		Thumbnailator.createThumbnail(new FileThumbnailTask(parameter, source, new File(BASE_DIR, "dest3.jpg")));
-	}
-
-	@After
-	public void clean() {
-		FileUtils.deleteQuietly(source);
-		FileUtils.deleteQuietly(watermark);
+		Thumbnailator.createThumbnail(new FileThumbnailTask(parameter, source, dest3));
 	}
 }

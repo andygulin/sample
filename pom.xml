@@ -49,7 +49,7 @@
 		<commons-math3.version>3.6.1</commons-math3.version>
 		<commons-digester3.version>3.2</commons-digester3.version>
 
-		<zxing.version>3.2.1</zxing.version>
+		<zxing.version>3.3.0</zxing.version>
 		<gson.version>2.7</gson.version>
 		<guava.version>19.0</guava.version>
 		<guice.version>4.1.0</guice.version>
@@ -78,6 +78,7 @@
 		<jdom2.version>2.0.6</jdom2.version>
 
 		<thumbnailator.version>0.4.8</thumbnailator.version>
+		<im4java.version>1.4.0</im4java.version>
 
 		<freemarker.version>2.3.23</freemarker.version>
 		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
@@ -283,6 +284,12 @@
 			<artifactId>thumbnailator</artifactId>
 			<version>${thumbnailator.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.im4java</groupId>
+			<artifactId>im4java</artifactId>
+			<version>${im4java.version}</version>
+		</dependency>
+
 
 		<!-- google -->
 		<dependency>
