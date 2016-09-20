@@ -13,22 +13,22 @@ import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.redisson.Config;
 import org.redisson.Redisson;
-import org.redisson.RedissonClient;
-import org.redisson.core.MessageListener;
-import org.redisson.core.RAtomicLong;
-import org.redisson.core.RBucket;
-import org.redisson.core.RCountDownLatch;
-import org.redisson.core.RDeque;
-import org.redisson.core.RHyperLogLog;
-import org.redisson.core.RList;
-import org.redisson.core.RLock;
-import org.redisson.core.RMap;
-import org.redisson.core.RQueue;
-import org.redisson.core.RSet;
-import org.redisson.core.RSortedSet;
-import org.redisson.core.RTopic;
+import org.redisson.api.RAtomicLong;
+import org.redisson.api.RBucket;
+import org.redisson.api.RCountDownLatch;
+import org.redisson.api.RDeque;
+import org.redisson.api.RHyperLogLog;
+import org.redisson.api.RList;
+import org.redisson.api.RLock;
+import org.redisson.api.RMap;
+import org.redisson.api.RQueue;
+import org.redisson.api.RSet;
+import org.redisson.api.RSortedSet;
+import org.redisson.api.RTopic;
+import org.redisson.api.RedissonClient;
+import org.redisson.api.listener.MessageListener;
+import org.redisson.config.Config;
 
 public class RedissonTest {
 
