@@ -43,8 +43,8 @@ public class RmiTest {
 	@Test
 	public void run() throws MalformedURLException, RemoteException, NotBoundException {
 		HelloService hello = (HelloService) Naming.lookup(HELLO_ADDRESS);
-		logger.info(hello.sayHello());
-		logger.info(hello.sayHello("haha"));
+		logger.info(hello.hello());
+		logger.info(hello.sayHello("小明"));
 
 		UserService user = (UserService) Naming.lookup(USER_ADDRESS);
 		logger.info(user.get());

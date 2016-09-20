@@ -13,12 +13,12 @@ public class HelloServiceImpl extends UnicastRemoteObject implements HelloServic
 
 	@Override
 	public String sayHello(String name) throws RemoteException {
-		return "hello : " + name;
+		return "Hello " + name;
 	}
 
 	@Override
-	public String sayHello() throws RemoteException {
-		return "hello : sb";
+	public String hello() throws RemoteException {
+		return "Hello World!";
 	}
 
 }
