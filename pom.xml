@@ -24,7 +24,7 @@
 		<compile.level>1.8</compile.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<spring.version>4.3.2.RELEASE</spring.version>
+		<spring.version>4.3.3.RELEASE</spring.version>
 		<mongo-java-driver.version>3.3.0</mongo-java-driver.version>
 		<jedis.version>2.9.0</jedis.version>
 		<redisson.version>2.3.0</redisson.version>
