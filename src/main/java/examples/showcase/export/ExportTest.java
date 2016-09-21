@@ -24,7 +24,7 @@ public class ExportTest {
 		for (int i = 1; i <= ROW_LENGTH; i++) {
 			employees.add(new Employee(i, RandomStringUtils.random(NAME_LENGTH, CHARS), true, new Date()));
 		}
-		final String filename = FileUtils.getTempDirectoryPath() + "bb.xls";
+		final String filename = FileUtils.getTempDirectoryPath() + "employee.xls";
 		boolean result = new ExportExcel<Employee>(employees, filename, Employee.class).export();
 		logger.info(filename);
 		logger.info(result);
