@@ -6,11 +6,9 @@ import java.util.List;
 
 import org.I0Itec.zkclient.DataUpdater;
 import org.I0Itec.zkclient.IZkChildListener;
-import org.I0Itec.zkclient.IZkConnection;
 import org.I0Itec.zkclient.IZkDataListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
-import org.I0Itec.zkclient.ZkConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -29,8 +27,7 @@ public class ZkClientTest extends ZooKeeperClientBaseTest {
 
 	@Before
 	public void init() throws IOException {
-		IZkConnection connection = new ZkConnection(SERVERS);
-		client = new ZkClient(connection, 3000);
+		client = new ZkClient(SERVERS, 3000);
 		client.subscribeChildChanges(PATH, new ZkChildListener());
 		client.subscribeDataChanges(PATH, new ZkDataListener());
 		client.subscribeStateChanges(new ZkStateListener());

@@ -5,7 +5,6 @@ import java.util.Date;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
 import org.apache.curator.framework.api.CuratorEvent;
 import org.apache.curator.framework.api.CuratorListener;
 import org.apache.curator.framework.api.UnhandledErrorListener;
@@ -39,10 +38,9 @@ public class CuratorTest extends ZooKeeperClientBaseTest {
 
 	@Before
 	public void init() {
-		Builder builder = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
+		client = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
 				.connectionTimeoutMs(30000).canBeReadOnly(false).retryPolicy(new ExponentialBackoffRetry(1000, 20))
-				.defaultData(null);
-		client = builder.build();
+				.defaultData(null).build();
 
 		connectionStateListenable = client.getConnectionStateListenable();
 		connectionStateListener = new ZKConnectionStateListener();
