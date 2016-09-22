@@ -10,8 +10,14 @@ import examples.showcase.generate.parse.Parse;
 
 public class GenerateCode {
 	public static void main(String[] args) {
-		MySQLConnection mySQLConnection = new MySQLConnection("localhost", 3306, "root", "root");
+		final String host = "localhost";
+		final int port = 3306;
+		final String user = "root";
+		final String passwd = "root";
+		MySQLConnection mySQLConnection = new MySQLConnection(host, port, user, passwd);
 		List<Table> tables = new Parse(mySQLConnection).getParseTables();
-		new GenerateJavaBean(tables).generate(new File("D:/"), "com.test.bean");
+		final File dir = new File("D:/");
+		final String pkg = "com.test.bean";
+		new GenerateJavaBean(tables).generate(dir, pkg);
 	}
 }

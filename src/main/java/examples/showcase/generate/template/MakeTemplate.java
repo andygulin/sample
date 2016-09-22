@@ -33,7 +33,7 @@ public class MakeTemplate {
 
 	public MakeTemplate() {
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-		Resource resource = new ClassPathResource("examples/showcase/generate/template/JavaBean.ftlh");
+		Resource resource = new ClassPathResource(Constants.TEMPLATE_FILE_PATH);
 		try {
 			String filePath = resource.getFile().getPath();
 			String fileDir = filePath.substring(0, filePath.lastIndexOf("\\"));
