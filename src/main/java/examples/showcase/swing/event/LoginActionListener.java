@@ -17,7 +17,7 @@ public class LoginActionListener implements ActionListener, KeyListener {
 		this.loginFrame = loginFrame;
 	}
 
-	private void action() {
+	private void loginAction() {
 		String txtUserName = loginFrame.getTxtUserName().getText();
 		String txtUserPassword = new String(loginFrame.getTxtUserPassword().getPassword());
 		if (txtUserName.equals("admin") && txtUserPassword.equals("admin")) {
@@ -29,7 +29,7 @@ public class LoginActionListener implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		action();
+		loginAction();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class LoginActionListener implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10) {
-			action();
+			loginAction();
 		}
 	}
 

@@ -24,8 +24,8 @@ public class JedisClusterTest {
 		poolConfig.setMaxTotal(10);
 
 		Set<HostAndPort> nodes = new HashSet<>();
-		nodes.add(new HostAndPort("", 6379));
-		nodes.add(new HostAndPort("", 6379));
+		nodes.add(new HostAndPort("localhost", 6379));
+		nodes.add(new HostAndPort("localhost", 6380));
 		jedis = new JedisCluster(nodes, poolConfig);
 	}
 

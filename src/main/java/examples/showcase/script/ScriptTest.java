@@ -15,6 +15,7 @@ import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -48,7 +49,7 @@ public class ScriptTest {
 			logger.info(engineFactory.getExtensions());
 			logger.info(engineFactory.getMimeTypes());
 			logger.info(engineFactory.getNames());
-			logger.info("");
+			logger.info(StringUtils.EMPTY);
 		}
 	}
 

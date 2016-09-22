@@ -22,4 +22,8 @@ public class ThreadPool {
 	public void execute(Runnable runnable) {
 		pool.execute(runnable);
 	}
+
+	public void shutdown() {
+		pool.shutdown();
+	}
 }
