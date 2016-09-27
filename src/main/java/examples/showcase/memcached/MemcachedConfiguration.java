@@ -25,7 +25,7 @@ public class MemcachedConfiguration {
 		SerializingTranscoder transcoder = new SerializingTranscoder();
 		transcoder.setCompressionThreshold(1024);
 		bean.setTranscoder(transcoder);
-		bean.setOpTimeout(1000);
+		bean.setOpTimeout(1000L);
 		bean.setTimeoutExceptionThreshold(1998);
 		bean.setHashAlg(DefaultHashAlgorithm.KETAMA_HASH);
 		bean.setLocatorType(Locator.CONSISTENT);
