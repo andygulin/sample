@@ -23,7 +23,6 @@ public class TypeMapper {
 		TYPE_MAPPERS.put(Types.BIGINT, BigInteger.class);
 		TYPE_MAPPERS.put(Types.FLOAT, Float.class);
 		TYPE_MAPPERS.put(Types.DOUBLE, Double.class);
-		TYPE_MAPPERS.put(Types.TINYINT, Integer.class);
 		TYPE_MAPPERS.put(Types.DECIMAL, BigDecimal.class);
 		TYPE_MAPPERS.put(Types.DATE, Date.class);
 		TYPE_MAPPERS.put(Types.TIME, Date.class);
