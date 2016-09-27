@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -35,6 +36,7 @@ public class ZxingTest {
 	private static final Logger logger = LogManager.getLogger(ZxingTest.class);
 	private static final String CODE_DIR = FileUtils.getTempDirectoryPath();
 	private static final String CODE_FILE = "website.png";
+	private static final String FILE_FORMAT = FilenameUtils.getExtension(CODE_FILE);
 	private static final Path file = Paths.get(CODE_DIR, CODE_FILE);
 	private static final String ENCODING = "UTF-8";
 	private static final int HEIGHT = 400;
@@ -48,7 +50,7 @@ public class ZxingTest {
 		hints.put(EncodeHintType.CHARACTER_SET, ENCODING);
 		hints.put(EncodeHintType.MARGIN, 0);
 		BitMatrix bitMatrix = new MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, WEIGHT, HEIGHT, hints);
-		MatrixToImageWriter.writeToPath(bitMatrix, "png", file);
+		MatrixToImageWriter.writeToPath(bitMatrix, FILE_FORMAT, file);
 		logger.info(file);
 	}
 
