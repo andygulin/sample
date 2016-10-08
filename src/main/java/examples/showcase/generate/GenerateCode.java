@@ -14,8 +14,7 @@ public class GenerateCode {
 		final int port = 3306;
 		final String user = "root";
 		final String passwd = "root";
-		MySQLConnection mySQLConnection = new MySQLConnection(host, port, user, passwd);
-		List<Table> tables = new Parse(mySQLConnection).getParseTables();
+		List<Table> tables = new Parse(new MySQLConnection(host, port, user, passwd)).getParseTables();
 		final File dir = new File("D:/");
 		final String pkg = "com.test.bean";
 		new GenerateJavaBean(tables).generate(dir, pkg);
