@@ -31,9 +31,9 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-public class ZxingTest {
+public class QRcodeTest {
 
-	private static final Logger logger = LogManager.getLogger(ZxingTest.class);
+	private static final Logger logger = LogManager.getLogger(QRcodeTest.class);
 	private static final String CODE_DIR = FileUtils.getTempDirectoryPath();
 	private static final String CODE_FILE = "website.png";
 	private static final String FILE_FORMAT = FilenameUtils.getExtension(CODE_FILE);
