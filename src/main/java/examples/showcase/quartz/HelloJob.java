@@ -12,6 +12,6 @@ public class HelloJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		logger.info("hello");
+		logger.info("HelloJob...");
 	}
 }

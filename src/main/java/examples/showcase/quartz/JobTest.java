@@ -9,8 +9,8 @@ public class JobTest {
 	public static void main(String[] args) throws SchedulerException {
 		SchedulerFactory factory = new StdSchedulerFactory();
 		Scheduler scheduler = factory.getScheduler();
-		scheduler.scheduleJob(PrintJobFactory.getJobDetail(), PrintJobFactory.getTrigger());
-		scheduler.scheduleJob(HelloJobFactory.getJobDetail(), HelloJobFactory.getTrigger());
+		scheduler.scheduleJob(JobDetailFactory.getJobDetail(PrintJob.class), PrintJobTriggerFactory.getTrigger());
+		scheduler.scheduleJob(JobDetailFactory.getJobDetail(HelloJob.class), HelloJobTriggerFactory.getTrigger());
 		scheduler.start();
 	}
 }

@@ -1,18 +1,10 @@
 package examples.showcase.quartz;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 
-public class HelloJobFactory {
-
-	public static JobDetail getJobDetail() {
-		JobBuilder jobBuilder = JobBuilder.newJob(HelloJob.class);
-		JobDetail jobDetail = jobBuilder.build();
-		return jobDetail;
-	}
+public class HelloJobTriggerFactory {
 
 	public static Trigger getTrigger() {
 		TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
