@@ -1,4 +1,4 @@
-package examples.showcase.cmd;
+package examples.showcase;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
