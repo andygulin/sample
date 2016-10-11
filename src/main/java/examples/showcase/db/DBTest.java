@@ -21,20 +21,20 @@ public class DBTest {
 
 	@Test
 	public void count2() {
-		int count = DBHelper.count("select count(*) from `user` where id=?", new Object[] { 1 });
+		int count = DBHelper.count("select count(*) from `user` where id=?", 1);
 		logger.info(count);
 	}
 
 	@Test
 	public void insert() {
-		int newId = DBHelper.insert("insert into `user` values(?,?,?,?,?)",
-				new Object[] { null, "bbb", 12, "shanghai", new Date() }, true);
+		int newId = DBHelper.insert("insert into `user` values(?,?,?,?,?)", true,
+				new Object[] { null, "bbb", 12, "shanghai", new Date() });
 		logger.info(newId);
 	}
 
 	@Test
 	public void query() {
-		Map<String, Object> row = DBHelper.queryRow("select * from `user` where id=?", new Object[] { 1 });
+		Map<String, Object> row = DBHelper.queryRow("select * from `user` where id=?", 1);
 		logger.info(row);
 	}
 
@@ -53,7 +53,7 @@ public class DBTest {
 
 	@Test
 	public void delete() {
-		int result = DBHelper.executeSQL("delete from `user` where id=?", new Object[] { 1 });
+		int result = DBHelper.executeSQL("delete from `user` where id=?", 1);
 		logger.info(result);
 	}
 

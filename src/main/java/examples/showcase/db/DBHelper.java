@@ -19,7 +19,7 @@ public class DBHelper {
 	private DBHelper() {
 	}
 
-	public static int count(String sql, Object[] args) {
+	public static int count(String sql, Object... args) {
 		int count = 0;
 		int len = args.length;
 		Connection con = null;
@@ -52,7 +52,7 @@ public class DBHelper {
 		return executeSQL(sql, new Object[] {});
 	}
 
-	public static int executeSQL(String sql, Object[] args) {
+	public static int executeSQL(String sql, Object... args) {
 		int rows = 0;
 		int len = args.length;
 		Connection con = null;
@@ -76,7 +76,7 @@ public class DBHelper {
 		return rows;
 	}
 
-	public static List<Map<String, Object>> queryList(String sql, Object[] args) {
+	public static List<Map<String, Object>> queryList(String sql, Object... args) {
 		List<Map<String, Object>> list = new ArrayList<>();
 		int len = args.length;
 		Connection con = null;
@@ -118,7 +118,7 @@ public class DBHelper {
 		return queryList(sql, new Object[] {});
 	}
 
-	public static Map<String, Object> queryRow(String sql, Object[] args) {
+	public static Map<String, Object> queryRow(String sql, Object... args) {
 		int len = args.length;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -157,7 +157,7 @@ public class DBHelper {
 		return queryRow(sql, new Object[] {});
 	}
 
-	public static int insert(String sql, Object[] args, boolean returnId) {
+	public static int insert(String sql, boolean returnId, Object... args) {
 		int rows = 0;
 		int insertId = 0;
 		int len = args.length;
