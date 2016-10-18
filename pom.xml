@@ -4,7 +4,7 @@
 	<name>code-sample</name>
 	<groupId>code.sample</groupId>
 	<artifactId>code-sample</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 
