@@ -85,12 +85,6 @@
 		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 
-		<protostuff.version>1.0.9</protostuff.version>
-		<kryo.version>2.24.0</kryo.version>
-		<hessian.version>4.0.38</hessian.version>
-		<msgpack.version>0.6.12</msgpack.version>
-		<avro.version>1.8.1</avro.version>
-
 		<jsch.version>0.1.54</jsch.version>
 		<sshj.version>0.10.0</sshj.version>
 		<quartz.version>2.2.3</quartz.version>
@@ -643,74 +637,6 @@
 			<artifactId>genson</artifactId>
 			<version>${genson.version}</version>
 		</dependency>
-
-		<!-- serializable -->
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-core</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-runtime</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-runtime-md</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-compiler</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-xml</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-json</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-api</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-model</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-model-json</artifactId>
-			<version>${protostuff.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.esotericsoftware.kryo</groupId>
-			<artifactId>kryo</artifactId>
-			<version>${kryo.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.caucho</groupId>
-			<artifactId>hessian</artifactId>
-			<version>${hessian.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.msgpack</groupId>
-			<artifactId>msgpack</artifactId>
-			<version>${msgpack.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.avro</groupId>
-			<artifactId>avro</artifactId>
-			<version>${avro.version}</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>javax.inject</groupId>
