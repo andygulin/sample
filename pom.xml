@@ -27,8 +27,8 @@
 		<spring.version>4.3.3.RELEASE</spring.version>
 		<mongo-java-driver.version>3.3.0</mongo-java-driver.version>
 		<jedis.version>2.9.0</jedis.version>
-		<redisson.version>3.0.0</redisson.version>
-		<lettuce.version>4.2.2.Final</lettuce.version>
+		<redisson.version>3.0.1</redisson.version>
+		<lettuce.version>4.3.0.Final</lettuce.version>
 
 		<javassist.version>3.21.0-GA</javassist.version>
 		<cglib.version>3.2.4</cglib.version>
@@ -43,7 +43,7 @@
 		<commons-configuration.version>1.10</commons-configuration.version>
 		<commons-configuration2.version>2.1</commons-configuration2.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-lang3.version>3.5</commons-lang3.version>
 		<commons-dbutils.version>1.6</commons-dbutils.version>
 		<commons-net.version>3.5</commons-net.version>
 		<commons-email.version>1.4</commons-email.version>
@@ -51,8 +51,8 @@
 		<commons-digester3.version>3.2</commons-digester3.version>
 
 		<zxing.version>3.3.0</zxing.version>
-		<gson.version>2.7</gson.version>
-		<guava.version>19.0</guava.version>
+		<gson.version>2.8.0</gson.version>
+		<guava.version>20.0</guava.version>
 		<guice.version>4.1.0</guice.version>
 		<dd-plist.version>1.16</dd-plist.version>
 
@@ -82,7 +82,7 @@
 		<im4java.version>1.4.0</im4java.version>
 
 		<freemarker.version>2.3.23</freemarker.version>
-		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
+		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 
 		<jsch.version>0.1.54</jsch.version>
@@ -106,7 +106,7 @@
 
 		<zt-zip.version>1.9</zt-zip.version>
 
-		<log4j.version>2.6.2</log4j.version>
+		<log4j.version>2.7</log4j.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.1.7</logback.version>
 
