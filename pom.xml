@@ -24,10 +24,10 @@
 		<compile.level>1.8</compile.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.version>4.3.4.RELEASE</spring.version>
 		<mongo-java-driver.version>3.3.0</mongo-java-driver.version>
 		<jedis.version>2.9.0</jedis.version>
-		<redisson.version>3.0.1</redisson.version>
+		<redisson.version>3.1.0</redisson.version>
 		<lettuce.version>4.3.0.Final</lettuce.version>
 
 		<javassist.version>3.21.0-GA</javassist.version>
