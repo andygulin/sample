@@ -21,7 +21,7 @@ public class HttpClientTest extends AbstractHttpTest {
 	private static final Logger logger = LogManager.getLogger(HttpClientTest.class);
 
 	@Test
-	public void request() throws ClientProtocolException, IOException {
+	public void request() throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url);
 		CloseableHttpResponse httpResponse = httpClient.execute(httpGet);

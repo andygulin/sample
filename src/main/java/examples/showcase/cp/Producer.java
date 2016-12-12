@@ -15,7 +15,7 @@ public class Producer implements Runnable {
 	@Override
 	public void run() {
 		try {
-			for (;;) {
+			while (true) {
 				String value = RandomStringUtils.random(5, "1234567890");
 				queue.put(value);
 			}
@@ -23,5 +23,4 @@ public class Producer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
 }

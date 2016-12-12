@@ -9,7 +9,7 @@ public class ProducerConsumerTest {
 	public static void main(String[] args) {
 		ExecutorService service = Executors.newCachedThreadPool();
 
-		BlockingQueue<String> queue = new ArrayBlockingQueue<String>(100);
+		BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);
 		service.execute(new Producer(queue));
 		service.execute(new Consumer(queue));
 

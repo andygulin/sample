@@ -14,10 +14,10 @@ public class Consumer implements Runnable {
 
 	@Override
 	public void run() {
-		List<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<>();
 		String value;
 		try {
-			for (;;) {
+			while (true) {
 				value = queue.take();
 				values.add(value);
 				if (values.size() == 100) {
@@ -31,5 +31,4 @@ public class Consumer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
 }
