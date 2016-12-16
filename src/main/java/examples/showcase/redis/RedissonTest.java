@@ -1,5 +1,14 @@
 package examples.showcase.redis;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.redisson.Redisson;
+import org.redisson.api.*;
+import org.redisson.config.Config;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -7,28 +16,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.redisson.Redisson;
-import org.redisson.api.RAtomicLong;
-import org.redisson.api.RBucket;
-import org.redisson.api.RCountDownLatch;
-import org.redisson.api.RDeque;
-import org.redisson.api.RHyperLogLog;
-import org.redisson.api.RList;
-import org.redisson.api.RLock;
-import org.redisson.api.RMap;
-import org.redisson.api.RQueue;
-import org.redisson.api.RSet;
-import org.redisson.api.RSortedSet;
-import org.redisson.api.RTopic;
-import org.redisson.api.RedissonClient;
-import org.redisson.api.listener.MessageListener;
-import org.redisson.config.Config;
 
 public class RedissonTest {
 
@@ -137,12 +124,7 @@ public class RedissonTest {
 	@Test
 	public void Topic() {
 		RTopic<String> topic = redisson.getTopic("Topic");
-		topic.addListener(new MessageListener<String>() {
-			@Override
-			public void onMessage(String channel, String msg) {
-				print(msg);
-			}
-		});
+		topic.addListener((channel, msg) -> print(msg));
 		topic.publish("hello");
 	}
 

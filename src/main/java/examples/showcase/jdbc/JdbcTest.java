@@ -1,27 +1,6 @@
 package examples.showcase.jdbc;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import examples.showcase.User;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +11,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.showcase.User;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.*;
+import java.util.*;
+import java.util.Date;
 
 public class JdbcTest {
 
@@ -40,7 +23,6 @@ public class JdbcTest {
 
 	private Connection con;
 	private PreparedStatement pstmt;
-	private Statement stmt;
 	private ResultSet rs;
 
 	@Before
@@ -99,7 +81,7 @@ public class JdbcTest {
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int cols = rsmd.getColumnCount();
 		List<Map<String, Object>> list = new ArrayList<>();
-		Map<String, Object> row = null;
+		Map<String, Object> row;
 		while (rs.next()) {
 			row = new HashMap<>(cols);
 			for (int i = 1; i <= cols; i++) {
@@ -119,7 +101,7 @@ public class JdbcTest {
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int cols = rsmd.getColumnCount();
 		List<User> users = new ArrayList<>();
-		User user = null;
+		User user;
 		while (rs.next()) {
 			user = new User();
 			for (int i = 1; i <= cols; i++) {
@@ -136,7 +118,7 @@ public class JdbcTest {
 		String sql = "INSERT INTO `file` VALUES(NULL,?,?,?)";
 		pstmt = con.prepareStatement(sql);
 		File[] files = getFiles();
-		BufferedInputStream in = null;
+		BufferedInputStream in;
 		for (File file : files) {
 			pstmt.setString(1, file.getName());
 			in = new BufferedInputStream(new FileInputStream(file));
@@ -152,8 +134,8 @@ public class JdbcTest {
 		String sql = "select * from `file`";
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
-		BufferedInputStream in = null;
-		BufferedOutputStream out = null;
+		BufferedInputStream in;
+		BufferedOutputStream out;
 		while (rs.next()) {
 			logger.info(rs.getInt("id"));
 			logger.info(rs.getString("filename"));
@@ -167,12 +149,7 @@ public class JdbcTest {
 
 	private File[] getFiles() {
 		File file = new File("/home/gulin/文档");
-		return file.listFiles(new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return pathname.isFile();
-			}
-		});
+		return file.listFiles(pathname -> pathname.isFile());
 	}
 
 	@Test
@@ -242,9 +219,6 @@ public class JdbcTest {
 	public void close() throws SQLException {
 		if (pstmt != null) {
 			pstmt.close();
-		}
-		if (stmt != null) {
-			stmt.close();
 		}
 		if (rs != null) {
 			rs.close();

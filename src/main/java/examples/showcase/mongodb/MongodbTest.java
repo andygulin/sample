@@ -1,11 +1,9 @@
 package examples.showcase.mongodb;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import com.mongodb.*;
+import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -24,20 +22,11 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.google.common.collect.Lists;
-import com.mongodb.Block;
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.ListCollectionsIterable;
-import com.mongodb.client.MapReduceIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
-import com.mongodb.client.model.Filters;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 public class MongodbTest {
 
@@ -90,12 +79,7 @@ public class MongodbTest {
 	@Test
 	public void collectionNames() {
 		MongoIterable<String> iter = db.listCollectionNames();
-		iter.forEach(new Block<String>() {
-			@Override
-			public void apply(String t) {
-				logger.info(t);
-			}
-		});
+		iter.forEach((Block<String>) t -> logger.info(t));
 
 		logger.info(StringUtils.repeat("=", 80));
 

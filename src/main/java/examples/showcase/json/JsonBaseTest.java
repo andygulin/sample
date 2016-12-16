@@ -1,12 +1,12 @@
 package examples.showcase.json;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class JsonBaseTest {
 
@@ -19,8 +19,8 @@ public abstract class JsonBaseTest {
 		int customCount = RandomUtils.nextInt(1, 10);
 		customs = new LinkedList<>();
 
-		int orderCount = 0;
-		List<Order> orders = null;
+		int orderCount;
+		List<Order> orders;
 		for (int i = 1; i <= customCount; i++) {
 			orderCount = RandomUtils.nextInt(1, 100);
 			orders = new LinkedList<>();

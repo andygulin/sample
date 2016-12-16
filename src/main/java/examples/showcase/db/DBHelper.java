@@ -1,19 +1,10 @@
 package examples.showcase.db;
 
-import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import java.beans.PropertyVetoException;
+import java.sql.*;
+import java.util.*;
 
 public class DBHelper {
 	private DBHelper() {
@@ -22,10 +13,9 @@ public class DBHelper {
 	public static int count(String sql, Object... args) {
 		int count = 0;
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		con = ConnectionFactory.getConnection();
+		Connection con = ConnectionFactory.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			if (len > 0) {
@@ -55,9 +45,8 @@ public class DBHelper {
 	public static int executeSQL(String sql, Object... args) {
 		int rows = 0;
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
-		con = ConnectionFactory.getConnection();
+		Connection con = ConnectionFactory.getConnection();
 		try {
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(sql);
@@ -79,11 +68,10 @@ public class DBHelper {
 	public static List<Map<String, Object>> queryList(String sql, Object... args) {
 		List<Map<String, Object>> list = new ArrayList<>();
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ResultSetMetaData rsmd = null;
-		con = ConnectionFactory.getConnection();
+		ResultSetMetaData rsmd;
+		Connection con = ConnectionFactory.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			if (len > 0) {
@@ -120,11 +108,10 @@ public class DBHelper {
 
 	public static Map<String, Object> queryRow(String sql, Object... args) {
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ResultSetMetaData rsmd = null;
-		con = ConnectionFactory.getConnection();
+		ResultSetMetaData rsmd;
+		Connection con = ConnectionFactory.getConnection();
 		Map<String, Object> row = null;
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -161,10 +148,9 @@ public class DBHelper {
 		int rows = 0;
 		int insertId = 0;
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		con = ConnectionFactory.getConnection();
+		Connection con = ConnectionFactory.getConnection();
 		try {
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -189,9 +175,8 @@ public class DBHelper {
 	public static int[] batch(String sql, Object[][] args) {
 		int[] rows = null;
 		int len = args.length;
-		Connection con = null;
 		PreparedStatement pstmt = null;
-		con = ConnectionFactory.getConnection();
+		Connection con = ConnectionFactory.getConnection();
 		try {
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(sql);

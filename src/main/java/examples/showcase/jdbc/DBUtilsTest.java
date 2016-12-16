@@ -1,32 +1,10 @@
 package examples.showcase.jdbc;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
+import examples.showcase.User;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.BeanMapHandler;
-import org.apache.commons.dbutils.handlers.ColumnListHandler;
-import org.apache.commons.dbutils.handlers.KeyedHandler;
-import org.apache.commons.dbutils.handlers.MapHandler;
-import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.handlers.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -35,7 +13,15 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import examples.showcase.User;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.*;
 
 public class DBUtilsTest {
 
@@ -183,7 +169,7 @@ public class DBUtilsTest {
 		QueryRunner query = new QueryRunner();
 		String sql = "SELECT * FROM `user` WHERE id=?";
 		try {
-			User user = query.query(con, sql, new BeanHandler<User>(User.class), new Object[] { 2 });
+			User user = query.query(con, sql, new BeanHandler<>(User.class), new Object[] { 2 });
 			logger.info(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -195,7 +181,7 @@ public class DBUtilsTest {
 		QueryRunner query = new QueryRunner();
 		String sql = "SELECT * FROM `user`";
 		try {
-			List<User> users = query.query(con, sql, new BeanListHandler<User>(User.class));
+			List<User> users = query.query(con, sql, new BeanListHandler<>(User.class));
 			for (User user : users)
 				logger.info(user);
 		} catch (SQLException e) {

@@ -1,14 +1,7 @@
 package examples.showcase.zookeeper;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-
-import org.I0Itec.zkclient.DataUpdater;
-import org.I0Itec.zkclient.IZkChildListener;
-import org.I0Itec.zkclient.IZkDataListener;
-import org.I0Itec.zkclient.IZkStateListener;
-import org.I0Itec.zkclient.ZkClient;
+import examples.showcase.User;
+import org.I0Itec.zkclient.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -16,7 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.showcase.User;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 public class ZkClientTest extends ZooKeeperClientBaseTest {
 
@@ -51,14 +46,11 @@ public class ZkClientTest extends ZooKeeperClientBaseTest {
 
 	@Test
 	public void update() {
-		client.updateDataSerialized(PATH, new DataUpdater<User>() {
-			@Override
-			public User update(User currentData) {
-				User user = currentData;
-				user.setAddress("beijing");
-				return user;
-			}
-		});
+		client.updateDataSerialized(PATH, (DataUpdater<User>) currentData -> {
+            User user = currentData;
+            user.setAddress("beijing");
+            return user;
+        });
 	}
 
 	@Test
