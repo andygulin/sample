@@ -2,7 +2,7 @@ package examples.showcase.callback.handler;
 
 public interface MessageHandler {
 
-	void success();
+    void success();
 
-	void failed();
+    void failed();
 }

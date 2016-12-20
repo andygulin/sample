@@ -1,12 +1,12 @@
 package examples.showcase.singleton;
 
 public enum SingletonEnum {
-	INSTANCE;
+    INSTANCE;
 
-	private SingletonEnum() {
-	}
+    private SingletonEnum() {
+    }
 
-	public SingletonEnum getInstance() {
-		return SingletonEnum.INSTANCE;
-	}
+    public SingletonEnum getInstance() {
+        return SingletonEnum.INSTANCE;
+    }
 }

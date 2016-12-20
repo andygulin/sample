@@ -1,51 +1,50 @@
 package examples.showcase.swing.event;
 
+import examples.showcase.swing.LoginFrame;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JOptionPane;
-
-import examples.showcase.swing.LoginFrame;
-
 public class LoginActionListener implements ActionListener, KeyListener {
 
-	private LoginFrame loginFrame;
+    private LoginFrame loginFrame;
 
-	public LoginActionListener(LoginFrame loginFrame) {
-		this.loginFrame = loginFrame;
-	}
+    public LoginActionListener(LoginFrame loginFrame) {
+        this.loginFrame = loginFrame;
+    }
 
-	private void loginAction() {
-		String txtUserName = loginFrame.getTxtUserName().getText();
-		String txtUserPassword = new String(loginFrame.getTxtUserPassword().getPassword());
-		if (txtUserName.equals("admin") && txtUserPassword.equals("admin")) {
-			JOptionPane.showMessageDialog(loginFrame, "登录成功", "提示", JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(loginFrame, "登录失败", "提示", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+    private void loginAction() {
+        String txtUserName = loginFrame.getTxtUserName().getText();
+        String txtUserPassword = new String(loginFrame.getTxtUserPassword().getPassword());
+        if (txtUserName.equals("admin") && txtUserPassword.equals("admin")) {
+            JOptionPane.showMessageDialog(loginFrame, "登录成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(loginFrame, "登录失败", "提示", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		loginAction();
-	}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        loginAction();
+    }
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+    @Override
+    public void keyTyped(KeyEvent e) {
 
-	}
+    }
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 10) {
-			loginAction();
-		}
-	}
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            loginAction();
+        }
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
+    @Override
+    public void keyReleased(KeyEvent e) {
 
-	}
+    }
 }

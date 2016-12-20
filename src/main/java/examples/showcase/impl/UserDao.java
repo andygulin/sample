@@ -1,19 +1,19 @@
 package examples.showcase.impl;
 
+import examples.showcase.User;
+
 import java.io.Serializable;
 import java.util.List;
 
-import examples.showcase.User;
-
 @ImplementBy(clazz = JdbcTemplateUserDaoImpl.class)
 public interface UserDao {
-	void save(User user);
+    void save(User user);
 
-	List<User> selectAll();
+    List<User> selectAll();
 
-	User select(Serializable id);
+    User select(Serializable id);
 
-	void update(User user);
+    void update(User user);
 
-	void delete(Serializable id);
+    void delete(Serializable id);
 }

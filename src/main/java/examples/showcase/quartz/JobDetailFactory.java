@@ -6,9 +6,9 @@ import org.quartz.JobDetail;
 
 public class JobDetailFactory {
 
-	public static JobDetail getJobDetail(Class<? extends Job> jobClass) {
-		JobBuilder jobBuilder = JobBuilder.newJob(jobClass);
-		JobDetail jobDetail = jobBuilder.build();
-		return jobDetail;
-	}
+    public static JobDetail getJobDetail(Class<? extends Job> jobClass) {
+        JobBuilder jobBuilder = JobBuilder.newJob(jobClass);
+        JobDetail jobDetail = jobBuilder.build();
+        return jobDetail;
+    }
 }

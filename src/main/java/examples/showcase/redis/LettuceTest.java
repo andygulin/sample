@@ -18,69 +18,69 @@ import java.util.concurrent.ExecutionException;
 
 public class LettuceTest {
 
-	private static final Logger logger = LogManager.getLogger(LettuceTest.class);
+    private static final Logger logger = LogManager.getLogger(LettuceTest.class);
 
-	private RedisClient client;
-	private StatefulRedisConnection<String, String> conn = null;
+    private RedisClient client;
+    private StatefulRedisConnection<String, String> conn = null;
 
-	@Before
-	public void init() {
-		RedisURI redisURI = new RedisURI();
-		redisURI.setHost("192.168.209.128");
-		redisURI.setPort(3306);
-		client = RedisClient.create(redisURI);
-		conn = client.connect();
-	}
+    @Before
+    public void init() {
+        RedisURI redisURI = new RedisURI();
+        redisURI.setHost("192.168.209.128");
+        redisURI.setPort(3306);
+        client = RedisClient.create(redisURI);
+        conn = client.connect();
+    }
 
-	@Test
-	public void set() throws InterruptedException, ExecutionException {
-		RedisCommands<String,String> command = conn.sync();
+    @Test
+    public void set() throws InterruptedException, ExecutionException {
+        RedisCommands<String, String> command = conn.sync();
 
-		String result = command.set("name", "aaa");
-		logger.info(result);
+        String result = command.set("name", "aaa");
+        logger.info(result);
 
-		result = command.set("name2", "bbb", SetArgs.Builder.ex(5000L));
-		logger.info(result);
-	}
+        result = command.set("name2", "bbb", SetArgs.Builder.ex(5000L));
+        logger.info(result);
+    }
 
-	@Test
-	public void get() throws InterruptedException, ExecutionException {
-		RedisCommands<String,String> command = conn.sync();
+    @Test
+    public void get() throws InterruptedException, ExecutionException {
+        RedisCommands<String, String> command = conn.sync();
 
-		String result = command.get("name");
-		logger.info(result);
-	}
+        String result = command.get("name");
+        logger.info(result);
+    }
 
-	@Test
-	public void hset() {
-		RedisCommands<String,String> command = conn.sync();
+    @Test
+    public void hset() {
+        RedisCommands<String, String> command = conn.sync();
 
-		boolean result = command.hset("user", "name", "aaa");
-		logger.info(result);
+        boolean result = command.hset("user", "name", "aaa");
+        logger.info(result);
 
-		Map<String, String> map = new HashMap<>();
-		map.put("age", "11");
-		map.put("address", "shanghai");
-		String res = command.hmset("user", map);
-		logger.info(res);
-	}
+        Map<String, String> map = new HashMap<>();
+        map.put("age", "11");
+        map.put("address", "shanghai");
+        String res = command.hmset("user", map);
+        logger.info(res);
+    }
 
-	@Test
-	public void hget() {
-		RedisCommands<String,String> command = conn.sync();
+    @Test
+    public void hget() {
+        RedisCommands<String, String> command = conn.sync();
 
-		String result = command.hget("user", "name");
-		logger.info(result);
+        String result = command.hget("user", "name");
+        logger.info(result);
 
-		Map<String, String> map = command.hgetall("user");
-		for (Entry<String, String> entry : map.entrySet()) {
-			logger.info(entry.getKey() + " " + entry.getValue());
-		}
-	}
+        Map<String, String> map = command.hgetall("user");
+        for (Entry<String, String> entry : map.entrySet()) {
+            logger.info(entry.getKey() + " " + entry.getValue());
+        }
+    }
 
-	@After
-	public void close() {
-		conn.close();
-		client.shutdown();
-	}
+    @After
+    public void close() {
+        conn.close();
+        client.shutdown();
+    }
 }

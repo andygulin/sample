@@ -1,54 +1,54 @@
 package examples.showcase.json;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 public class Custom implements Serializable {
 
-	private static final long serialVersionUID = 6990848215792571019L;
+    private static final long serialVersionUID = 6990848215792571019L;
 
-	private long id;
-	private String name;
-	private List<Order> orders;
+    private long id;
+    private String name;
+    private List<Order> orders;
 
-	public Custom() {
-	}
+    public Custom() {
+    }
 
-	public Custom(long id, String name, List<Order> orders) {
-		this.id = id;
-		this.name = name;
-		this.orders = orders;
-	}
+    public Custom(long id, String name, List<Order> orders) {
+        this.id = id;
+        this.name = name;
+        this.orders = orders;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public List<Order> getOrders() {
-		return orders;
-	}
+    public List<Order> getOrders() {
+        return orders;
+    }
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

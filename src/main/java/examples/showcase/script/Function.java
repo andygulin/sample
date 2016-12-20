@@ -1,19 +1,19 @@
 package examples.showcase.script;
 
+import examples.showcase.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import examples.showcase.User;
-
 public interface Function {
 
-	int add(int a, int b);
+    int add(int a, int b);
 
-	ArrayList<String> list();
+    ArrayList<String> list();
 
-	HashMap<Integer, String> maps();
+    HashMap<Integer, String> maps();
 
-	ArrayList<User> users();
+    ArrayList<User> users();
 
-	void printUser(User user);
+    void printUser(User user);
 }

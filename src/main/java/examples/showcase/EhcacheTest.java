@@ -1,5 +1,6 @@
 package examples.showcase;
 
+import examples.showcase.callback.CustomApplication;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ehcache.Cache;
@@ -11,38 +12,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.showcase.callback.CustomApplication;
-
 public class EhcacheTest {
 
-	private static final Logger logger = LogManager.getLogger(CustomApplication.class);
+    private static final Logger logger = LogManager.getLogger(CustomApplication.class);
 
-	private CacheManager cacheManager;
+    private CacheManager cacheManager;
 
-	@Before
-	public void init() {
+    @Before
+    public void init() {
 
-	}
+    }
 
-	@Test
-	public void cache() {
-		cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
-				.withCache("preConfigured", CacheConfigurationBuilder
-						.newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(100))
-						.build())
-				.build(true);
-		Cache<String, String> preConfigured = cacheManager.getCache("preConfigured", String.class, String.class);
-		logger.info(preConfigured.get("name"));
+    @Test
+    public void cache() {
+        cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+                .withCache("preConfigured", CacheConfigurationBuilder
+                        .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(100))
+                        .build())
+                .build(true);
+        Cache<String, String> preConfigured = cacheManager.getCache("preConfigured", String.class, String.class);
+        logger.info(preConfigured.get("name"));
 
-		Cache<String, String> myCache = cacheManager.createCache("myCache", CacheConfigurationBuilder
-				.newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(100)).build());
+        Cache<String, String> myCache = cacheManager.createCache("myCache", CacheConfigurationBuilder
+                .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(100)).build());
 
-		myCache.put("name", "andygulin");
-		logger.info(myCache.get("name"));
-	}
+        myCache.put("name", "andygulin");
+        logger.info(myCache.get("name"));
+    }
 
-	@After
-	public void close() {
-		cacheManager.close();
-	}
+    @After
+    public void close() {
+        cacheManager.close();
+    }
 }

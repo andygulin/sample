@@ -19,170 +19,170 @@ import java.util.concurrent.TimeUnit;
 
 public class RedissonTest {
 
-	private static final Logger logger = LogManager.getLogger(RedissonTest.class);
+    private static final Logger logger = LogManager.getLogger(RedissonTest.class);
 
-	private RedissonClient redisson;
+    private RedissonClient redisson;
 
-	@Before
-	public void init() {
-		Config config = new Config();
-		config.useSingleServer().setAddress("192.168.68.130:6379");
-		redisson = Redisson.create(config);
-	}
+    @Before
+    public void init() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("192.168.68.130:6379");
+        redisson = Redisson.create(config);
+    }
 
-	@Test
-	public void RAtomicLong() {
-		RAtomicLong atomicLong = redisson.getAtomicLong("AtomicLong");
-		atomicLong.set(1L);
-		atomicLong.incrementAndGet();
+    @Test
+    public void RAtomicLong() {
+        RAtomicLong atomicLong = redisson.getAtomicLong("AtomicLong");
+        atomicLong.set(1L);
+        atomicLong.incrementAndGet();
 
-		print(atomicLong.get());
-	}
+        print(atomicLong.get());
+    }
 
-	@Test
-	public void Bucket() throws InterruptedException, ExecutionException {
-		RBucket<String> bucket = redisson.getBucket("Bucket");
+    @Test
+    public void Bucket() throws InterruptedException, ExecutionException {
+        RBucket<String> bucket = redisson.getBucket("Bucket");
 
-		bucket.set("aaa");
-		print(bucket.get());
+        bucket.set("aaa");
+        print(bucket.get());
 
-		bucket.setAsync("bbb");
-		print(bucket.getAsync().get());
-	}
+        bucket.setAsync("bbb");
+        print(bucket.getAsync().get());
+    }
 
-	@Test
-	public void CountDownLatch_await() throws InterruptedException {
-		RCountDownLatch countDownLatch = redisson.getCountDownLatch("CountDownLatch");
-		countDownLatch.trySetCount(2L);
-		countDownLatch.await();
-	}
+    @Test
+    public void CountDownLatch_await() throws InterruptedException {
+        RCountDownLatch countDownLatch = redisson.getCountDownLatch("CountDownLatch");
+        countDownLatch.trySetCount(2L);
+        countDownLatch.await();
+    }
 
-	@Test
-	public void CountDownLatch_countDown() {
-		RCountDownLatch countDownLatch = redisson.getCountDownLatch("CountDownLatch");
-		countDownLatch.countDown();
-	}
+    @Test
+    public void CountDownLatch_countDown() {
+        RCountDownLatch countDownLatch = redisson.getCountDownLatch("CountDownLatch");
+        countDownLatch.countDown();
+    }
 
-	@Test
-	public void Deque() {
-		RDeque<String> deque = redisson.getDeque("Deque");
-		deque.add("aaa");
-		deque.add("bbb");
-		deque.add("ccc");
-		deque.addFirst("zzz");
+    @Test
+    public void Deque() {
+        RDeque<String> deque = redisson.getDeque("Deque");
+        deque.add("aaa");
+        deque.add("bbb");
+        deque.add("ccc");
+        deque.addFirst("zzz");
 
-		deque.pollLast();
-		print(deque);
-	}
+        deque.pollLast();
+        print(deque);
+    }
 
-	@Test
-	public void Queue() {
-		RQueue<String> queue = redisson.getQueue("Queue");
-		queue.add("aaa");
-		queue.add("bbb");
-		queue.add("ccc");
+    @Test
+    public void Queue() {
+        RQueue<String> queue = redisson.getQueue("Queue");
+        queue.add("aaa");
+        queue.add("bbb");
+        queue.add("ccc");
 
-		queue.poll();
-		print(queue);
-	}
+        queue.poll();
+        print(queue);
+    }
 
-	@Test
-	public void List() {
-		RList<String> list = redisson.getList("List");
-		list.add("aaa");
-		list.add("bbb");
-		list.add("ccc");
+    @Test
+    public void List() {
+        RList<String> list = redisson.getList("List");
+        list.add("aaa");
+        list.add("bbb");
+        list.add("ccc");
 
-		list.remove("bbb");
-		print(list);
-	}
+        list.remove("bbb");
+        print(list);
+    }
 
-	@Test
-	public void Set() {
-		RSet<String> set = redisson.getSet("Set");
-		set.add("aaa");
-		set.addAsync("bbb");
-		set.add("ccc");
+    @Test
+    public void Set() {
+        RSet<String> set = redisson.getSet("Set");
+        set.add("aaa");
+        set.addAsync("bbb");
+        set.add("ccc");
 
-		set.removeAsync("bbb");
-		print(set);
-	}
+        set.removeAsync("bbb");
+        print(set);
+    }
 
-	@Test
-	public void Lock() throws InterruptedException {
-		RLock lock = redisson.getLock("Lock");
-		lock.lock();
+    @Test
+    public void Lock() throws InterruptedException {
+        RLock lock = redisson.getLock("Lock");
+        lock.lock();
 
-		print("lock 3s...");
-		TimeUnit.SECONDS.sleep(3L);
+        print("lock 3s...");
+        TimeUnit.SECONDS.sleep(3L);
 
-		lock.unlock();
+        lock.unlock();
 
-		print("unlock...");
-	}
+        print("unlock...");
+    }
 
-	@Test
-	public void Topic() {
-		RTopic<String> topic = redisson.getTopic("Topic");
-		topic.addListener((channel, msg) -> print(msg));
-		topic.publish("hello");
-	}
+    @Test
+    public void Topic() {
+        RTopic<String> topic = redisson.getTopic("Topic");
+        topic.addListener((channel, msg) -> print(msg));
+        topic.publish("hello");
+    }
 
-	@Test
-	public void HyperLogLog() throws InterruptedException, ExecutionException {
-		RHyperLogLog<String> log = redisson.getHyperLogLog("HyperLogLog");
-		log.add("aaa");
-		log.addAsync("bbb");
+    @Test
+    public void HyperLogLog() throws InterruptedException, ExecutionException {
+        RHyperLogLog<String> log = redisson.getHyperLogLog("HyperLogLog");
+        log.add("aaa");
+        log.addAsync("bbb");
 
-		print(log.count());
-		print(log.countAsync().get());
-	}
+        print(log.count());
+        print(log.countAsync().get());
+    }
 
-	@Test
-	public void SortedSet() {
-		RSortedSet<String> sortedSet = redisson.getSortedSet("SortedSet");
-		sortedSet.add("aaa");
-		sortedSet.add("bbb");
-		sortedSet.add("111");
-		sortedSet.add("213");
-		sortedSet.add("a1b");
+    @Test
+    public void SortedSet() {
+        RSortedSet<String> sortedSet = redisson.getSortedSet("SortedSet");
+        sortedSet.add("aaa");
+        sortedSet.add("bbb");
+        sortedSet.add("111");
+        sortedSet.add("213");
+        sortedSet.add("a1b");
 
-		print(sortedSet);
-	}
+        print(sortedSet);
+    }
 
-	@Test
-	public void Map() {
-		RMap<String, Object> map = redisson.getMap("Map");
-		map.put("name", "aaa");
-		map.putAsync("age", 11);
-		map.fastPut("address", "shanghai");
-		map.fastPutAsync("createAt", new Date());
+    @Test
+    public void Map() {
+        RMap<String, Object> map = redisson.getMap("Map");
+        map.put("name", "aaa");
+        map.putAsync("age", 11);
+        map.fastPut("address", "shanghai");
+        map.fastPutAsync("createAt", new Date());
 
-		print(map);
-	}
+        print(map);
+    }
 
-	@After
-	public void shutdown() {
-		redisson.shutdown();
-	}
+    @After
+    public void shutdown() {
+        redisson.shutdown();
+    }
 
-	private void print(Object obj) {
-		if (obj instanceof Number) {
-			logger.info(obj);
-		}
-		if (obj instanceof String) {
-			logger.info(obj);
-		}
-		if (obj instanceof Collection<?>) {
-			Iterator<?> iter = ((Collection<?>) obj).iterator();
-			while (iter.hasNext()) {
-				logger.info(iter.next());
-			}
-		}
-		if (obj instanceof Map<?, ?>) {
-			for (Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
-				logger.info(entry.getKey() + " : " + entry.getValue());
-			}
-		}
-	}
+    private void print(Object obj) {
+        if (obj instanceof Number) {
+            logger.info(obj);
+        }
+        if (obj instanceof String) {
+            logger.info(obj);
+        }
+        if (obj instanceof Collection<?>) {
+            Iterator<?> iter = ((Collection<?>) obj).iterator();
+            while (iter.hasNext()) {
+                logger.info(iter.next());
+            }
+        }
+        if (obj instanceof Map<?, ?>) {
+            for (Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
+                logger.info(entry.getKey() + " : " + entry.getValue());
+            }
+        }
+    }
 }

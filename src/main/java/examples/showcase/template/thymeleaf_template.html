@@ -1,21 +1,27 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title>测试</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>测试</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-	<table width="100%">
-    	<tr><td>ID</td><td>姓名</td><td>年龄</td><td>地址</td><td>创建时间</td></tr>
-    	<tr th:each="item : ${users}">
-    		<td th:text="${item.id}"></td>
-    		<td th:text="${item.name}"></td>
-    		<td th:text="${item.age}"></td>
-    		<td th:text="${item.address}"></td>
-    		<td th:text="${#dates.format(item.createAt,'yyyy-MM-dd HH:mm:ss')}"></td>
-    	</tr>
-    </table>
+<table width="100%">
+    <tr>
+        <td>ID</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>地址</td>
+        <td>创建时间</td>
+    </tr>
+    <tr th:each="item : ${users}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.age}"></td>
+        <td th:text="${item.address}"></td>
+        <td th:text="${#dates.format(item.createAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+</table>
 </body>
 </html>

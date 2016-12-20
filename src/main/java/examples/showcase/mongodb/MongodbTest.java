@@ -30,155 +30,155 @@ import java.util.List;
 
 public class MongodbTest {
 
-	private static final Logger logger = LogManager.getLogger(MongodbTest.class);
+    private static final Logger logger = LogManager.getLogger(MongodbTest.class);
 
-	private MongoClient client = null;
-	private MongoDatabase db = null;
-	private MongoCollection<Document> collection = null;
-	private String dbName;
-	private String collectionName;
-	private List<ServerAddress> seeds;
+    private MongoClient client = null;
+    private MongoDatabase db = null;
+    private MongoCollection<Document> collection = null;
+    private String dbName;
+    private String collectionName;
+    private List<ServerAddress> seeds;
 
-	@Before
-	public void init() throws ConfigurationException, IOException {
-		Resource resource = new ClassPathResource("mongodb.properties");
-		Configuration configuration = new PropertiesConfiguration(resource.getFile());
-		dbName = configuration.getString("mongodb.dbName");
-		collectionName = configuration.getString("mongodb.collectionName");
-		String host = configuration.getString("mongodb.host");
-		int port = configuration.getInt("mongodb.port");
-		seeds = Lists.newArrayList(new ServerAddress(host, port));
-	}
+    @Before
+    public void init() throws ConfigurationException, IOException {
+        Resource resource = new ClassPathResource("mongodb.properties");
+        Configuration configuration = new PropertiesConfiguration(resource.getFile());
+        dbName = configuration.getString("mongodb.dbName");
+        collectionName = configuration.getString("mongodb.collectionName");
+        String host = configuration.getString("mongodb.host");
+        int port = configuration.getInt("mongodb.port");
+        seeds = Lists.newArrayList(new ServerAddress(host, port));
+    }
 
-	@Before
-	public void conn() throws UnknownHostException {
-		MongoClientOptions options = MongoClientOptions.builder().build();
-		client = new MongoClient(seeds, options);
-		db = client.getDatabase(dbName);
-		collection = db.getCollection(collectionName);
-	}
+    @Before
+    public void conn() throws UnknownHostException {
+        MongoClientOptions options = MongoClientOptions.builder().build();
+        client = new MongoClient(seeds, options);
+        db = client.getDatabase(dbName);
+        collection = db.getCollection(collectionName);
+    }
 
-	@Test
-	public void dbs() {
-		Collection<DB> dbs = client.getUsedDatabases();
-		for (DB db : dbs) {
-			logger.info(db);
-		}
-	}
+    @Test
+    public void dbs() {
+        Collection<DB> dbs = client.getUsedDatabases();
+        for (DB db : dbs) {
+            logger.info(db);
+        }
+    }
 
-	@Test
-	public void dropDatabase1() {
-		client.dropDatabase(dbName);
-	}
+    @Test
+    public void dropDatabase1() {
+        client.dropDatabase(dbName);
+    }
 
-	@Test
-	public void dropDatabase2() {
-		db.drop();
-	}
+    @Test
+    public void dropDatabase2() {
+        db.drop();
+    }
 
-	@Test
-	public void collectionNames() {
-		MongoIterable<String> iter = db.listCollectionNames();
-		iter.forEach((Block<String>) t -> logger.info(t));
+    @Test
+    public void collectionNames() {
+        MongoIterable<String> iter = db.listCollectionNames();
+        iter.forEach((Block<String>) t -> logger.info(t));
 
-		logger.info(StringUtils.repeat("=", 80));
+        logger.info(StringUtils.repeat("=", 80));
 
-		ListCollectionsIterable<Document> iterable = db.listCollections();
-		MongoCursor<Document> cursor = iterable.iterator();
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
-			logger.info(doc.getString("name"));
-		}
-	}
+        ListCollectionsIterable<Document> iterable = db.listCollections();
+        MongoCursor<Document> cursor = iterable.iterator();
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+            logger.info(doc.getString("name"));
+        }
+    }
 
-	@Test
-	public void codecRegistry() {
-		CodecRegistry registry = db.getCodecRegistry();
-		logger.info(registry);
-	}
+    @Test
+    public void codecRegistry() {
+        CodecRegistry registry = db.getCodecRegistry();
+        logger.info(registry);
+    }
 
-	@Test
-	public void insert() {
-		Document document = new Document().append("name", "aaa").append("age", new BsonInt32(11))
-				.append("money", new BsonInt64(1836238L)).append("createAt", new Date());
-		collection.insertOne(document);
-		logger.info(document.get("_id"));
+    @Test
+    public void insert() {
+        Document document = new Document().append("name", "aaa").append("age", new BsonInt32(11))
+                .append("money", new BsonInt64(1836238L)).append("createAt", new Date());
+        collection.insertOne(document);
+        logger.info(document.get("_id"));
 
-		document = new Document().append("name", "bbb").append("age", new BsonInt32(12))
-				.append("money", new BsonInt64(7298368L)).append("createAt", new Date());
-		collection.insertOne(document);
-		logger.info(document.get("_id"));
-	}
+        document = new Document().append("name", "bbb").append("age", new BsonInt32(12))
+                .append("money", new BsonInt64(7298368L)).append("createAt", new Date());
+        collection.insertOne(document);
+        logger.info(document.get("_id"));
+    }
 
-	@Test
-	public void insertMany() {
-		final int COUNT = 50000;
-		List<Document> documents = Lists.newArrayListWithCapacity(COUNT);
-		for (int i = 0; i < COUNT; i++) {
-			Document document = new Document();
-			document.put("name", random(5));
-			document.put("age", new BsonInt32(randomInt(2)));
-			document.put("money", new BsonInt64(randomLong(10)));
-			document.put("createAt", new Date());
-			documents.add(document);
-		}
-		collection.insertMany(documents);
-	}
+    @Test
+    public void insertMany() {
+        final int COUNT = 50000;
+        List<Document> documents = Lists.newArrayListWithCapacity(COUNT);
+        for (int i = 0; i < COUNT; i++) {
+            Document document = new Document();
+            document.put("name", random(5));
+            document.put("age", new BsonInt32(randomInt(2)));
+            document.put("money", new BsonInt64(randomLong(10)));
+            document.put("createAt", new Date());
+            documents.add(document);
+        }
+        collection.insertMany(documents);
+    }
 
-	@Test
-	public void count() {
-		long count = collection.count();
-		logger.info(count);
-	}
+    @Test
+    public void count() {
+        long count = collection.count();
+        logger.info(count);
+    }
 
-	@Test
-	public void findOne() {
-		FindIterable<Document> iter = collection.find(Filters.eq("name", "aaa"));
-		Document doc = iter.first();
-		logger.info(doc.toJson());
-	}
+    @Test
+    public void findOne() {
+        FindIterable<Document> iter = collection.find(Filters.eq("name", "aaa"));
+        Document doc = iter.first();
+        logger.info(doc.toJson());
+    }
 
-	@Test
-	public void find() {
-		MongoCursor<Document> cursor = collection.find().iterator();
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
-			logger.info(doc.toJson());
-		}
-		cursor.close();
-	}
+    @Test
+    public void find() {
+        MongoCursor<Document> cursor = collection.find().iterator();
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+            logger.info(doc.toJson());
+        }
+        cursor.close();
+    }
 
-	@Test
-	public void mapReduce() {
-		String map = "function() { emit(this.name, {count:1});}";
-		String reduce = "function(key, values) {";
-		reduce += "var total = 0;";
-		reduce += "for(var i=0;i<values.length;i++){total += values[i].count;}";
-		reduce += "return {count:total};}";
+    @Test
+    public void mapReduce() {
+        String map = "function() { emit(this.name, {count:1});}";
+        String reduce = "function(key, values) {";
+        reduce += "var total = 0;";
+        reduce += "for(var i=0;i<values.length;i++){total += values[i].count;}";
+        reduce += "return {count:total};}";
 
-		MapReduceIterable<Document> iter = collection.mapReduce(map, reduce);
-		MongoCursor<Document> cursor = iter.iterator();
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
-			logger.info(doc.toJson());
-		}
-		cursor.close();
-	}
+        MapReduceIterable<Document> iter = collection.mapReduce(map, reduce);
+        MongoCursor<Document> cursor = iter.iterator();
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+            logger.info(doc.toJson());
+        }
+        cursor.close();
+    }
 
-	@After
-	public void close() {
-		client.close();
-	}
+    @After
+    public void close() {
+        client.close();
+    }
 
-	private String random(int count) {
-		return RandomStringUtils.random(count, "abcdefghijklmnopqrstuvwxyz");
-	}
+    private String random(int count) {
+        return RandomStringUtils.random(count, "abcdefghijklmnopqrstuvwxyz");
+    }
 
-	private int randomInt(int count) {
-		return NumberUtils.toInt(RandomStringUtils.random(count, "123456789"));
-	}
+    private int randomInt(int count) {
+        return NumberUtils.toInt(RandomStringUtils.random(count, "123456789"));
+    }
 
-	private long randomLong(int count) {
-		return NumberUtils.toLong(RandomStringUtils.random(count, "123456789"));
-	}
+    private long randomLong(int count) {
+        return NumberUtils.toLong(RandomStringUtils.random(count, "123456789"));
+    }
 }

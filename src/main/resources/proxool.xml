@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <something-else-entirely>
-	<proxool>
-		<alias>mysql</alias>
-		<driver-url>jdbc:mysql://localhost:3306/test?characterEncoding=utf-8
-		</driver-url>
-		<driver-class>com.mysql.jdbc.Driver</driver-class>
-		<driver-properties>
-			<property name="user" value="root" />
-			<property name="password" value="root" />
-		</driver-properties>
-	</proxool>
-	<proxool>
-		<alias>mysql2</alias>
-		<driver-url>jdbc:mysql://localhost:3306/test2?characterEncoding=utf-8
-		</driver-url>
-		<driver-class>com.mysql.jdbc.Driver</driver-class>
-		<driver-properties>
-			<property name="user" value="root" />
-			<property name="password" value="root" />
-		</driver-properties>
-	</proxool>
+    <proxool>
+        <alias>mysql</alias>
+        <driver-url>jdbc:mysql://localhost:3306/test?characterEncoding=utf-8
+        </driver-url>
+        <driver-class>com.mysql.jdbc.Driver</driver-class>
+        <driver-properties>
+            <property name="user" value="root"/>
+            <property name="password" value="root"/>
+        </driver-properties>
+    </proxool>
+    <proxool>
+        <alias>mysql2</alias>
+        <driver-url>jdbc:mysql://localhost:3306/test2?characterEncoding=utf-8
+        </driver-url>
+        <driver-class>com.mysql.jdbc.Driver</driver-class>
+        <driver-properties>
+            <property name="user" value="root"/>
+            <property name="password" value="root"/>
+        </driver-properties>
+    </proxool>
 </something-else-entirely>

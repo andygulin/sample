@@ -1,64 +1,59 @@
 package examples.showcase;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
+import org.junit.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.runners.MethodSorters;
 
+import java.util.concurrent.TimeUnit;
+
 @RunWith(JUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JunitTest {
 
-	private static final Logger logger = LogManager.getLogger(JunitTest.class);
+    private static final Logger logger = LogManager.getLogger(JunitTest.class);
 
-	@Before
-	public void before() {
-		logger.info("before");
-	}
+    @BeforeClass
+    public static void beforeClass() {
+        logger.info("beforeClass");
+    }
 
-	@BeforeClass
-	public static void beforeClass() {
-		logger.info("beforeClass");
-	}
+    @AfterClass
+    public static void afterClass() {
+        logger.info("afterClass");
+    }
 
-	@Test
-	public void test() {
-		Assert.assertNull(null);
-		Assert.assertNotNull("a");
-		Assert.assertEquals("abc", "abc");
-	}
+    @Before
+    public void before() {
+        logger.info("before");
+    }
 
-	@Test(expected = NullPointerException.class)
-	public void exception() {
-		throw new NullPointerException();
-	}
+    @Test
+    public void test() {
+        Assert.assertNull(null);
+        Assert.assertNotNull("a");
+        Assert.assertEquals("abc", "abc");
+    }
 
-	@Test(timeout = 2000L)
-	public void timeout() {
-		try {
-			TimeUnit.SECONDS.sleep(1L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test(expected = NullPointerException.class)
+    public void exception() {
+        throw new NullPointerException();
+    }
 
-	@After
-	public void after() {
-		logger.info("after");
-	}
+    @Test(timeout = 2000L)
+    public void timeout() {
+        try {
+            TimeUnit.SECONDS.sleep(1L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@AfterClass
-	public static void afterClass() {
-		logger.info("afterClass");
-	}
+    @After
+    public void after() {
+        logger.info("after");
+    }
 }

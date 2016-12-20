@@ -1,7 +1,6 @@
 package examples.showcase.zookeeper;
 
-import java.util.Date;
-
+import examples.showcase.User;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -19,108 +18,106 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.showcase.User;
+import java.util.Date;
 
 public class CuratorTest extends ZooKeeperClientBaseTest {
 
-	private static final Logger logger = LogManager.getLogger(CuratorTest.class);
+    private static final Logger logger = LogManager.getLogger(CuratorTest.class);
+    private static final String PATH = "/user";
+    private CuratorFramework client;
+    private Listenable<ConnectionStateListener> connectionStateListenable;
+    private Listenable<UnhandledErrorListener> unhandledErrorListenable;
+    private Listenable<CuratorListener> curatorListenable;
 
-	private CuratorFramework client;
-	private static final String PATH = "/user";
+    private ConnectionStateListener connectionStateListener;
+    private UnhandledErrorListener unhandledErrorListener;
+    private CuratorListener curatorListener;
 
-	private Listenable<ConnectionStateListener> connectionStateListenable;
-	private Listenable<UnhandledErrorListener> unhandledErrorListenable;
-	private Listenable<CuratorListener> curatorListenable;
+    @Before
+    public void init() {
+        client = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
+                .connectionTimeoutMs(30000).canBeReadOnly(false).retryPolicy(new ExponentialBackoffRetry(1000, 20))
+                .defaultData(null).build();
 
-	private ConnectionStateListener connectionStateListener;
-	private UnhandledErrorListener unhandledErrorListener;
-	private CuratorListener curatorListener;
+        connectionStateListenable = client.getConnectionStateListenable();
+        connectionStateListener = new ZKConnectionStateListener();
+        connectionStateListenable.addListener(connectionStateListener);
 
-	@Before
-	public void init() {
-		client = CuratorFrameworkFactory.builder().connectString(SERVERS).sessionTimeoutMs(30000)
-				.connectionTimeoutMs(30000).canBeReadOnly(false).retryPolicy(new ExponentialBackoffRetry(1000, 20))
-				.defaultData(null).build();
+        unhandledErrorListenable = client.getUnhandledErrorListenable();
+        unhandledErrorListener = new ZKUnhandledErrorListener();
+        unhandledErrorListenable.addListener(unhandledErrorListener);
 
-		connectionStateListenable = client.getConnectionStateListenable();
-		connectionStateListener = new ZKConnectionStateListener();
-		connectionStateListenable.addListener(connectionStateListener);
+        curatorListenable = client.getCuratorListenable();
+        curatorListener = new ZKCuratorListener();
+        curatorListenable.addListener(curatorListener);
 
-		unhandledErrorListenable = client.getUnhandledErrorListenable();
-		unhandledErrorListener = new ZKUnhandledErrorListener();
-		unhandledErrorListenable.addListener(unhandledErrorListener);
+        client.start();
+    }
 
-		curatorListenable = client.getCuratorListenable();
-		curatorListener = new ZKCuratorListener();
-		curatorListenable.addListener(curatorListener);
+    @Test
+    public void create() throws Exception {
+        Stat stat = client.checkExists().forPath(PATH);
+        if (stat != null) {
+            client.delete().forPath(PATH);
+        }
+        User user = new User(1, "aaa", 11, "shanghai", new Date());
+        byte[] data = SerializationUtils.serialize(user);
+        client.create().forPath(PATH, data);
+    }
 
-		client.start();
-	}
+    @Test
+    public void read() throws Exception {
+        byte[] data = client.getData().forPath(PATH);
+        User user = SerializationUtils.deserialize(data);
+        logger.info(user);
+    }
 
-	@Test
-	public void create() throws Exception {
-		Stat stat = client.checkExists().forPath(PATH);
-		if (stat != null) {
-			client.delete().forPath(PATH);
-		}
-		User user = new User(1, "aaa", 11, "shanghai", new Date());
-		byte[] data = SerializationUtils.serialize(user);
-		client.create().forPath(PATH, data);
-	}
+    @Test
+    public void update() throws Exception {
+        byte[] data = client.getData().forPath(PATH);
+        User user = SerializationUtils.deserialize(data);
+        user.setAddress("beijing");
+        data = SerializationUtils.serialize(user);
+        client.setData().forPath(PATH, data);
+    }
 
-	@Test
-	public void read() throws Exception {
-		byte[] data = client.getData().forPath(PATH);
-		User user = SerializationUtils.deserialize(data);
-		logger.info(user);
-	}
+    @Test
+    public void delete() throws Exception {
+        client.delete().forPath(PATH);
+    }
 
-	@Test
-	public void update() throws Exception {
-		byte[] data = client.getData().forPath(PATH);
-		User user = SerializationUtils.deserialize(data);
-		user.setAddress("beijing");
-		data = SerializationUtils.serialize(user);
-		client.setData().forPath(PATH, data);
-	}
+    @After
+    public void close() {
+        connectionStateListenable.removeListener(connectionStateListener);
+        unhandledErrorListenable.removeListener(unhandledErrorListener);
+        curatorListenable.removeListener(curatorListener);
+        client.close();
+    }
 
-	@Test
-	public void delete() throws Exception {
-		client.delete().forPath(PATH);
-	}
+    private static class ZKConnectionStateListener implements ConnectionStateListener {
 
-	@After
-	public void close() {
-		connectionStateListenable.removeListener(connectionStateListener);
-		unhandledErrorListenable.removeListener(unhandledErrorListener);
-		curatorListenable.removeListener(curatorListener);
-		client.close();
-	}
+        @Override
+        public void stateChanged(CuratorFramework client, ConnectionState newState) {
+            logger.info("ConnectionStateListener -> stateChanged");
+            logger.info(newState);
+        }
+    }
 
-	private static class ZKConnectionStateListener implements ConnectionStateListener {
+    private static class ZKUnhandledErrorListener implements UnhandledErrorListener {
 
-		@Override
-		public void stateChanged(CuratorFramework client, ConnectionState newState) {
-			logger.info("ConnectionStateListener -> stateChanged");
-			logger.info(newState);
-		}
-	}
+        @Override
+        public void unhandledError(String message, Throwable e) {
+            logger.info("UnhandledErrorListenable -> unhandledError");
+            logger.info(message);
+        }
+    }
 
-	private static class ZKUnhandledErrorListener implements UnhandledErrorListener {
+    private static class ZKCuratorListener implements CuratorListener {
 
-		@Override
-		public void unhandledError(String message, Throwable e) {
-			logger.info("UnhandledErrorListenable -> unhandledError");
-			logger.info(message);
-		}
-	}
-
-	private static class ZKCuratorListener implements CuratorListener {
-
-		@Override
-		public void eventReceived(CuratorFramework client, CuratorEvent event) throws Exception {
-			logger.info("CuratorListener -> eventReceived");
-			logger.info(event);
-		}
-	}
+        @Override
+        public void eventReceived(CuratorFramework client, CuratorEvent event) throws Exception {
+            logger.info("CuratorListener -> eventReceived");
+            logger.info(event);
+        }
+    }
 }

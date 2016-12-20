@@ -8,10 +8,10 @@ import org.quartz.JobExecutionException;
 
 public class PrintJob implements Job {
 
-	private static final Logger logger = LogManager.getLogger(PrintJob.class);
+    private static final Logger logger = LogManager.getLogger(PrintJob.class);
 
-	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		logger.info("PrintJob...");
-	}
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        logger.info("PrintJob...");
+    }
 }

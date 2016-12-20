@@ -231,7 +231,7 @@ public class JdbcTemplateTest {
     @Test
     public void call() {
         /*
-		 * INSERT INTO `user` VALUES(NULL,'aaa',11,'sh',NOW());
+         * INSERT INTO `user` VALUES(NULL,'aaa',11,'sh',NOW());
 		 */
         List<SqlParameter> declaredParameters = new ArrayList<>();
         this.jdbcTemplate.call(con -> {
