@@ -86,7 +86,7 @@ public class DBHelper {
             for (int i = 1; i <= columnCount; i++) {
                 cols.add(rsmd.getColumnLabel(i));
             }
-            Map<String, Object> row = null;
+            Map<String, Object> row;
             while (rs.next()) {
                 row = new HashMap<>(columnCount);
                 for (String col : cols) {
