@@ -75,7 +75,7 @@ public class MavenVersionCheck {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                List<Element> lists = Lists.newArrayList();
+                List<Element> lists;
                 Elements els = doc.select("a.vbtn.release");
                 if (els != null && els.size() > 0) {
                     lists = els.subList(0, 1);

@@ -16,7 +16,7 @@ public class UserServiceImpl extends UnicastRemoteObject implements UserService 
 
     public UserServiceImpl() throws RemoteException {
         super();
-        users = new ArrayList<User>(5);
+        users = new ArrayList<>(5);
         users.add(new User(1, "小明", 10, "香港", new Date()));
         users.add(new User(2, "小红", 11, "天津", new Date()));
         users.add(new User(3, "小啊", 12, "北京", new Date()));

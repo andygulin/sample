@@ -66,7 +66,7 @@ public class DBUtilsTest {
         QueryRunner query = new QueryRunner();
         String sql = "UPDATE `user` SET `name`=? WHERE id=?";
         try {
-            query.update(con, sql, new Object[]{"2342", 2});
+            query.update(con, sql, "2342", 2);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,9 +121,7 @@ public class DBUtilsTest {
                     new PropertyDescriptor("createAt", User.class)};
             query.fillStatementWithBean(pstmt, user, descriptors);
             pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IntrospectionException e) {
+        } catch (SQLException | IntrospectionException e) {
             e.printStackTrace();
         }
     }
@@ -133,7 +131,7 @@ public class DBUtilsTest {
         QueryRunner query = new QueryRunner();
         String sql = "SELECT `name` FROM `user` WHERE id=?";
         try {
-            String name = query.query(con, sql, new ScalarHandler<String>("name"), new Object[]{2});
+            String name = query.query(con, sql, new ScalarHandler<String>("name"), 2);
             logger.info(name);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,7 +143,7 @@ public class DBUtilsTest {
         QueryRunner query = new QueryRunner();
         String sql = "SELECT * FROM `user` WHERE id=?";
         try {
-            Map<String, Object> row = query.query(con, sql, new MapHandler(), new Object[]{2});
+            Map<String, Object> row = query.query(con, sql, new MapHandler(), 2);
             logger.info(row);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,7 +155,7 @@ public class DBUtilsTest {
         QueryRunner query = new QueryRunner();
         String sql = "SELECT * FROM `user` WHERE id=?";
         try {
-            Object[] objs = query.query(con, sql, new ArrayHandler(), new Object[]{2});
+            Object[] objs = query.query(con, sql, new ArrayHandler(), 2);
             logger.info(Arrays.toString(objs));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -169,7 +167,7 @@ public class DBUtilsTest {
         QueryRunner query = new QueryRunner();
         String sql = "SELECT * FROM `user` WHERE id=?";
         try {
-            User user = query.query(con, sql, new BeanHandler<>(User.class), new Object[]{2});
+            User user = query.query(con, sql, new BeanHandler<>(User.class), 2);
             logger.info(user);
         } catch (SQLException e) {
             e.printStackTrace();

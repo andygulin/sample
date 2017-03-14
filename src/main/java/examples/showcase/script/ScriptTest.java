@@ -10,7 +10,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import javax.script.*;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -62,33 +61,33 @@ public class ScriptTest {
     }
 
     @Test
-    public void list() throws FileNotFoundException, IOException, ScriptException {
+    public void list() throws IOException, ScriptException {
         Function function = getFunction();
         ArrayList<String> list = function.list();
         logger.info(list);
     }
 
     @Test
-    public void maps() throws FileNotFoundException, IOException, ScriptException {
+    public void maps() throws IOException, ScriptException {
         Function function = getFunction();
         HashMap<Integer, String> list = function.maps();
         logger.info(list);
     }
 
     @Test
-    public void users() throws FileNotFoundException, IOException, ScriptException {
+    public void users() throws IOException, ScriptException {
         Function function = getFunction();
         ArrayList<User> list = function.users();
         logger.info(list);
     }
 
     @Test
-    public void print() throws FileNotFoundException, IOException, ScriptException {
+    public void print() throws IOException, ScriptException {
         Function function = getFunction();
         function.printUser(new User(1, "aaa", 11, "shanghai", new Date()));
     }
 
-    private Invocable getInvocable() throws FileNotFoundException, IOException, ScriptException {
+    private Invocable getInvocable() throws IOException, ScriptException {
         ScriptEngine engine = engineManager.getEngineByExtension("js");
         Resource resource = new ClassPathResource("js/function.js");
         Reader reader = new FileReader(resource.getFile());
@@ -97,7 +96,7 @@ public class ScriptTest {
         return invoke;
     }
 
-    private Function getFunction() throws FileNotFoundException, IOException, ScriptException {
+    private Function getFunction() throws IOException, ScriptException {
         Invocable invocable = getInvocable();
         Function function = invocable.getInterface(Function.class);
         return function;

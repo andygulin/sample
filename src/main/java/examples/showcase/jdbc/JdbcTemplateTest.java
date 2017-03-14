@@ -160,7 +160,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void queryBean() {
-        List<User> users = this.jdbcTemplate.query("SELECT * FROM `user`", new BeanPropertyRowMapper<User>(User.class));
+        List<User> users = this.jdbcTemplate.query("SELECT * FROM `user`", new BeanPropertyRowMapper<>(User.class));
         logger.info(users);
     }
 

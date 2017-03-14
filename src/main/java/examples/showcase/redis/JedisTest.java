@@ -84,7 +84,7 @@ public class JedisTest {
         String key = "zset";
 
         Map<String, Double> members = newHashMap();
-        String str = "";
+        String str;
         for (double i = 1; i <= 100; i++) {
             str = randomInt(5);
             members.put(str, i);

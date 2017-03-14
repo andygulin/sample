@@ -1,6 +1,5 @@
 package examples.showcase.guava;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -88,10 +87,8 @@ public class GuavaCollection {
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         ImmutableMultiset<Integer> immutableMultiset = ImmutableMultiset
                 .copyOf(Collections2.filter(list, input -> input > 5));
-        Optional<ImmutableMultiset<Integer>> optional = Optional.fromNullable(immutableMultiset);
-        if (optional.isPresent()) {
-            logger.info(optional.get());
-        }
+        Optional<ImmutableMultiset<Integer>> optional = Optional.ofNullable(immutableMultiset);
+        optional.ifPresent(logger::info);
     }
 
     @Test

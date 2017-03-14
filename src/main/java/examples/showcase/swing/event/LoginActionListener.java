@@ -19,7 +19,9 @@ public class LoginActionListener implements ActionListener, KeyListener {
     private void loginAction() {
         String txtUserName = loginFrame.getTxtUserName().getText();
         String txtUserPassword = new String(loginFrame.getTxtUserPassword().getPassword());
-        if (txtUserName.equals("admin") && txtUserPassword.equals("admin")) {
+        final String userName = "admin";
+        final String userPass = "admin";
+        if (txtUserName.equals(userName) && txtUserPassword.equals(userPass)) {
             JOptionPane.showMessageDialog(loginFrame, "登录成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(loginFrame, "登录失败", "提示", JOptionPane.ERROR_MESSAGE);
@@ -38,7 +40,7 @@ public class LoginActionListener implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 10) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             loginAction();
         }
     }

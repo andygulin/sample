@@ -70,7 +70,7 @@ public class CodecTest {
     }
 
     private void sound(Class<? extends StringEncoder> clazz) throws Exception {
-        StringEncoder encoder = (StringEncoder) clazz.newInstance();
+        StringEncoder encoder = clazz.newInstance();
         logger.info("hello:" + encoder.encode("hello"));
         logger.info("world: " + encoder.encode("world"));
         logger.info("extend: " + encoder.encode("extend"));
