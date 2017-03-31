@@ -3,10 +3,13 @@ package examples.showcase.mongodb;
 import com.google.common.collect.Lists;
 import com.mongodb.*;
 import com.mongodb.client.*;
+import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.model.Filters;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -16,13 +19,16 @@ import org.bson.BsonInt32;
 import org.bson.BsonInt64;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Date;
@@ -108,6 +114,17 @@ public class MongodbTest {
                 .append("money", new BsonInt64(7298368L)).append("createAt", new Date());
         collection.insertOne(document);
         logger.info(document.get("_id"));
+    }
+
+    @Test
+    public void insertImages() throws Exception {
+        GridFSBucket gridFSBucket = GridFSBuckets.create(db);
+        Collection<File> files = FileUtils.listFiles(new File(("E:\\dl")), new String[]{"jpg", "png"}, false);
+        for (File file : files) {
+            InputStream is = FileUtils.openInputStream(file);
+            ObjectId fileId = gridFSBucket.uploadFromStream(file.getName(), is);
+            logger.info(fileId);
+        }
     }
 
     @Test
