@@ -1,7 +1,11 @@
 package examples.showcase.zookeeper;
 
 import examples.showcase.User;
-import org.I0Itec.zkclient.*;
+import org.I0Itec.zkclient.DataUpdater;
+import org.I0Itec.zkclient.IZkChildListener;
+import org.I0Itec.zkclient.IZkDataListener;
+import org.I0Itec.zkclient.IZkStateListener;
+import org.I0Itec.zkclient.ZkClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.zookeeper.Watcher.Event.KeeperState;

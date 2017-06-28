@@ -8,7 +8,11 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class CommonsLangTest {
 

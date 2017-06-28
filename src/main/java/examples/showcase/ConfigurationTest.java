@@ -1,6 +1,10 @@
 package examples.showcase;
 
-import com.dd.plist.*;
+import com.dd.plist.NSArray;
+import com.dd.plist.NSDictionary;
+import com.dd.plist.NSObject;
+import com.dd.plist.PropertyListFormatException;
+import com.dd.plist.PropertyListParser;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
