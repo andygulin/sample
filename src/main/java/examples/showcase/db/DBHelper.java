@@ -136,7 +136,7 @@ public class DBHelper {
             for (int i = 1; i <= columnCount; i++) {
                 cols.add(rsmd.getColumnLabel(i));
             }
-            if(rs.next()) {
+            if (rs.next()) {
                 row = new HashMap<>(columnCount);
                 for (String col : cols) {
                     row.put(col, rs.getObject(col));

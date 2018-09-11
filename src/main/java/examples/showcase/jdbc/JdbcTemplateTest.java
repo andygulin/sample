@@ -248,7 +248,7 @@ public class JdbcTemplateTest {
     public void call() {
         /*
          * INSERT INTO `user` VALUES(NULL,'aaa',11,'sh',NOW());
-		 */
+         */
         List<SqlParameter> declaredParameters = new ArrayList<>();
         this.jdbcTemplate.call(con -> {
             CallableStatement statement = con.prepareCall("call insertUser()");
@@ -261,10 +261,10 @@ public class JdbcTemplateTest {
     public void call2() {
         /*
          * `insertuser`(p_name VARCHAR(20),p_age
-		 * INT,p_addressVARCHAR(20),p_createAt DATETIME)
-		 * 
-		 * INSERT INTO `user` VALUES(NULL,p_name,p_age,p_address,p_createAt);
-		 */
+         * INT,p_addressVARCHAR(20),p_createAt DATETIME)
+         *
+         * INSERT INTO `user` VALUES(NULL,p_name,p_age,p_address,p_createAt);
+         */
         List<SqlParameter> declaredParameters = new ArrayList<>();
         declaredParameters.add(new SqlParameter(Types.VARCHAR));
         declaredParameters.add(new SqlParameter(Types.INTEGER));
